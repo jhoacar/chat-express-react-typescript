@@ -7,9 +7,11 @@ const router = Router();
 
 const version = getVersion({ minimal: true });
 
-router.use(`/api/v${version}`, api);
+const apiRoute = `/api/v${version}`;
+
+router.use(apiRoute, api);
 router.get('/api', (req: Request, res: Response) => {
-  res.redirect(`/api/v${version}`);
+  res.redirect(apiRoute);
 });
 
 router.use('/', web);

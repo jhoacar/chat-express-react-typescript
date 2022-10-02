@@ -1,0 +1,6 @@
+###
+POST /api/v1/user
+Host: localhost:8888
+Content-Type: application/json
+
+{"email":"jhoan@gmail.com","password":"12345"}

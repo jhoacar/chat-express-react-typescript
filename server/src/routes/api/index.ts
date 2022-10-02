@@ -1,9 +1,14 @@
-import { getVersion } from '@utils/package';
-import { Request, Response, Router } from 'express';
+import {
+  json, Request, Response, Router, urlencoded,
+} from 'express';
 
 import { readdirSync } from 'fs';
 
 const router = Router();
+
+router.use(json());
+router.use(urlencoded({ extended: false }));
+
 /**
  * We use a dynamic import for all
  * subfolders in api folder
@@ -19,8 +24,7 @@ readdirSync(__dirname, { withFileTypes: true })
     }));
 
 router.get('/', (req:Request, res:Response) => {
-  const version = getVersion({ minimal: true });
-  res.redirect(`v${version}/docs`);
+  res.redirect(`${req.url}docs`);
 });
 
 export default router;

@@ -13,6 +13,7 @@ export const handleRegister = async (req: Request, res: Response) => {
         body: userSaved,
       });
   } catch (error: any) {
+    console.log(error);
     res.status(500)
       .send({
         error: error.message,

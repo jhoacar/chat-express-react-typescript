@@ -1,4 +1,5 @@
 import { handleRegister } from '@src/controllers/user';
+import { userRegisterMiddleware } from '@src/middlewares/user';
 import { Router } from 'express';
 
 const router = Router();
@@ -49,6 +50,6 @@ const router = Router();
  *                  type: json
  *                  example: {"message":"User registered succesfully"}
  */
-router.post('/', handleRegister);
+router.post('/', userRegisterMiddleware, handleRegister);
 
 export default router;
