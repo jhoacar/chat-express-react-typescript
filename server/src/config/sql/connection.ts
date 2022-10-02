@@ -8,6 +8,7 @@ const options: Options = {
       rejectUnauthorized: false,
     },
   },
+  logging: false,
 };
 
 const sequelize = new Sequelize(uri, options);

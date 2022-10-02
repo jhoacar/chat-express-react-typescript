@@ -1,4 +1,5 @@
 import { handleLogin } from '@controllers/auth';
+import { loginMiddleware } from '@src/middlewares/auth';
 import { Router } from 'express';
 
 const router = Router();
@@ -36,6 +37,6 @@ const router = Router();
  *                  example: {"message":"User logged succesfully", "body": {"token":"..."}}
  *
  */
-router.post('/login', handleLogin);
+router.post('/login', loginMiddleware, handleLogin);
 
 export default router;

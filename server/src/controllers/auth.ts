@@ -3,6 +3,6 @@ import { Request, Response } from 'express';
 
 export const handleLogin = (req: Request, res: Response) => {
   res.json({
-    body: req.body,
+    message: 'token sent in cookies',
   });
 };

@@ -3,12 +3,13 @@ import {
 } from 'express';
 
 import { readdirSync } from 'fs';
+import cors from 'cors';
 
 const router = Router();
 
 router.use(json());
 router.use(urlencoded({ extended: false }));
-
+router.use(cors());
 /**
  * We use a dynamic import for all
  * subfolders in api folder
@@ -24,7 +25,7 @@ readdirSync(__dirname, { withFileTypes: true })
     }));
 
 router.get('/', (req:Request, res:Response) => {
-  res.redirect(`${req.url}docs`);
+  res.redirect(`${req.originalUrl}/docs`);
 });
 
 export default router;
