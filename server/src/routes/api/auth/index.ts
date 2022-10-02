@@ -1,5 +1,5 @@
 import { handleLogin } from '@controllers/auth';
-import { loginMiddleware } from '@src/middlewares/auth';
+import { loginMiddleware } from '@middlewares/auth';
 import { Router } from 'express';
 
 const router = Router();

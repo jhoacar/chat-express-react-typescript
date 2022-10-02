@@ -1,4 +1,4 @@
-import srcPath from '@src/dirname';
+import srcPath from '@rootDir';
 
 // eslint-disable-next-line import/no-dynamic-require
 const packageJSON = require(`${srcPath}/../../package.json`);

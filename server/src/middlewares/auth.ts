@@ -1,3 +1,5 @@
+import { UserSchema } from '@models/schemas';
+import { validateJWT } from '@utils/jwt';
 import { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 
@@ -20,6 +22,22 @@ export const loginMiddleware = async (req:Request, res: Response, nxt: NextFunct
   return nxt();
 };
 
-export default {
-  loginMiddleware,
+export const authMiddleware = (req:Request, res: Response, nxt: NextFunction) => {
+  try {
+    const jwt = req.headers.authorization as string;
+
+    if (!jwt) {
+      return res.status(400).json({ errors: ['Token is required'] });
+    }
+
+    req.user = validateJWT(jwt) as UserSchema;
+
+    if (!req.user) {
+      return res.status(400).json({ errors: ['Token invalid'] });
+    }
+
+    return nxt();
+  } catch (error:any) {
+    return res.status(400).json({ errors: [{ message: error.message }] });
+  }
 };

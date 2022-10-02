@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { getVersion } from '@src/utils/package';
+import { getVersion } from '@utils/package';
 import api from './api';
 import web from './web';
 

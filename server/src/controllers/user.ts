@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { User as UserModel } from '@models';
 import { User } from '@models/schemas';
-import { encryptPassword } from '@src/utils/bcrypt';
+import { encryptPassword } from '@utils/bcrypt';
 import { Request, Response } from 'express';
 
 export const handleRegister = async (req: Request, res: Response) => {
@@ -24,7 +24,7 @@ export const handleRegister = async (req: Request, res: Response) => {
 
     res.status(500)
       .send({
-        error: error.message,
+        errors: [{ message: error.message }],
       });
   }
 };
@@ -45,7 +45,7 @@ export const handleUnregister = async (req: Request, res: Response) => {
 
     res.status(500)
       .send({
-        error: error.message,
+        errors: [{ message: error.message }],
       });
   }
 };
@@ -66,7 +66,7 @@ export const handleGetUsers = async (req: Request, res: Response) => {
 
     res.status(500)
       .send({
-        error: error.message,
+        errors: [{ message: error.message }],
       });
   }
 };
@@ -87,7 +87,7 @@ export const handleGetUser = async (req: Request, res: Response) => {
 
     res.status(500)
       .send({
-        error: error.message,
+        errors: [{ message: error.message }],
       });
   }
 };

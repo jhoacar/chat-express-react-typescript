@@ -1,7 +1,7 @@
 import {
   handleGetUser, handleGetUsers, handleRegister, handleUnregister,
-} from '@src/controllers/user';
-import { userRegisterMiddleware } from '@src/middlewares/user';
+} from '@controllers/user';
+import { userRegisterMiddleware, userUnregisterMiddleware } from '@middlewares/user';
 import { Router } from 'express';
 
 const router = Router();
@@ -58,6 +58,6 @@ router.get('/:id', handleGetUser);
  */
 router.post('/', userRegisterMiddleware, handleRegister);
 
-router.delete('/', handleUnregister);
+router.delete('/', userUnregisterMiddleware, handleUnregister);
 
 export default router;

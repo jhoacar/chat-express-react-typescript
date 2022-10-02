@@ -32,7 +32,8 @@ Content-Type: application/json
     "password":"12345"
 }
 
-### Login New User
-GET /api/v1/user/10
+### Chat for the user
+GET /api/v1/chat
 Host: localhost:8888
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJqaG9hbiIsImVtYWlsIjoiamhvYW5AZ21haWwuY29tIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wMlQyMTowODo1MS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0wMlQyMTowODo1MS4wMDBaIiwiaWF0IjoxNjY0NzQ1NzQxLCJleHAiOjE2NjQ3NDkzNDF9.d9iy399nL6N1cobPMvzFbksGf3Sp5cqSMHYpCDUHcM8
 Content-Type: application/json

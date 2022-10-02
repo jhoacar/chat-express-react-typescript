@@ -10,8 +10,8 @@
     "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
-      "@src/*": [
-        "./*"
+      "@rootDir": [
+        "./dirname.ts"
       ],
       "@routes/*": [
         "routes/*",
@@ -45,9 +45,6 @@
       ],
     }
   },
-  "include": [
-    "src/**/*.ts"
-  ],
   "exclude": [
     "node_modules",
     "dist"
