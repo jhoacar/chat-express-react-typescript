@@ -1,29 +1,16 @@
 {
-  "exclude": [
-    "dist",
-    "test",
-    "client"
-  ],
-  "ts-node": {
-    "transpileOnly": true,
-    "files": true
-  },
   "compilerOptions": {
     "target": "es2016",
-    "module": "CommonJS",
-    "rootDir": "src",
-    "moduleResolution": "node",
-    "checkJs": true,
-    "outDir": "dist",
+    "module": "commonjs",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "noImplicitAny": true,
     "skipLibCheck": true,
-    "baseUrl": "src",
-    "resolveJsonModule": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "baseUrl": "./src",
     "paths": {
-      "@src/*":[
+      "@src/*": [
         "./*"
       ],
       "@routes/*": [
@@ -57,5 +44,12 @@
         "config/*"
       ],
     }
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
