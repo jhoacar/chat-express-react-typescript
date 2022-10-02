@@ -2,7 +2,7 @@ import express from 'express';
 // import morgan from 'morgan';
 import router from '@routes';
 import { createServer } from 'http';
-import { Server, Socket } from 'socket.io';
+import { Server } from 'socket.io';
 
 const app = express();
 
@@ -16,13 +16,21 @@ const io = new Server(server, {
   },
 });
 
-io.on('connecion', (socket: Socket) => {
+io.on('connecion', (socket) => {
   const { address, issued } = socket.handshake;
 
   console.log(`New connection from ${address} - ${new Date(issued)}`);
 
-  socket.on('join', (data) => {
-    console.log('User connected send: ', data);
+  socket.on('join', (data: any) => {
+    console.log(`User (${address} - ${new Date(issued)}) connected send: \n`, data);
+
+    const { roomName } = data;
+    socket.join(roomName);
+    socket.to(roomName).broadcast.emit('new-user', data);
+
+    socket.on('disconnect', () => {
+      socket.to(roomName).broadcast.emit('bye-user', data);
+    });
   });
 });
 
