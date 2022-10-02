@@ -14,6 +14,6 @@ router.get('/api', (req: Request, res: Response) => {
   res.redirect(apiRoute);
 });
 
-router.use('/', web);
+router.use(web);
 
 export default router;
