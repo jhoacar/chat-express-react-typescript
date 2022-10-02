@@ -1,9 +1,9 @@
 /* eslint-disable class-methods-use-this */
 import { User as UserBase, UserQuery, UserSchema } from '@models/schemas';
-import DataTypes from 'sequelize';
+import DataTypes, { InferAttributes, InferCreationAttributes, Model as BaseModel } from 'sequelize';
 import sequelize from '@config/sql/connection';
 
-const schema = {
+UserBase.schema = {
   // Model attributes are defined here
   name: {
     type: DataTypes.STRING,
@@ -19,69 +19,44 @@ const schema = {
   },
 };
 
-const driver = sequelize.define('User', schema, { tableName: 'users' });
+interface UserModel extends
+  BaseModel<InferAttributes<UserModel>, InferCreationAttributes<UserModel>>,
+  UserSchema {}
+
+const driver = sequelize.define<UserModel>('User', UserBase.schema, { tableName: 'users' });
+UserBase.driver = driver;
 
 export default class User extends UserBase {
-  static schema = schema;
-
-  static driver = driver;
-
-  private user: UserSchema;
-
-  constructor(user: UserSchema) {
-    super(user);
-    this.user = user;
-  }
-
-  async save() {
+  public async save() {
     const data: any = { ...this.user };
-    await this.driver.create(data);
-    return this.user;
+    const user = await driver.create(data, { raw: true });
+    return {
+      ...this.user,
+      password: undefined,
+      id: user.id,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async find(query: UserQuery) {
-    const user: UserSchema = {
-      name: '',
-      email: '',
-      password: '',
-    };
-    return [user];
+  public async find(query: UserQuery) {
+    const users = await driver.findAll({ where: { ...query }, raw: true, nest: true });
+    return users;
   }
 
-  async findOne() {
-    const user: UserSchema = {
-      name: '',
-      email: '',
-      password: '',
-    };
+  public async findOne(query: UserQuery) {
+    const user = await driver.findOne({ where: { ...query }, raw: true, nest: true });
     return user;
   }
 
-  async updateOne() {
-    const user: UserSchema = {
-      name: '',
-      email: '',
-      password: '',
-    };
+  public async updateOne(query: UserQuery, data: UserQuery) {
+    const user = await driver.update(data, { where: { ...query } });
     return user;
   }
 
-  async deleteOne() {
-    const user: UserSchema = {
-      name: '',
-      email: '',
-      password: '',
-    };
-    return user;
-  }
-
-  async update() {
-    const user: UserSchema = {
-      name: '',
-      email: '',
-      password: '',
-    };
+  public async deleteOne(query: UserQuery) {
+    const user = await driver.destroy({ where: { ...query } });
     return user;
   }
 }

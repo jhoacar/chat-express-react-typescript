@@ -1,8 +1,14 @@
-import { handleRegister } from '@src/controllers/user';
+import {
+  handleGetUser, handleGetUsers, handleRegister, handleUnregister,
+} from '@src/controllers/user';
 import { userRegisterMiddleware } from '@src/middlewares/user';
 import { Router } from 'express';
 
 const router = Router();
+
+router.get('/', handleGetUsers);
+
+router.get('/:id', handleGetUser);
 
 /**
  * @swagger
@@ -51,5 +57,7 @@ const router = Router();
  *                  example: {"message":"User registered succesfully"}
  */
 router.post('/', userRegisterMiddleware, handleRegister);
+
+router.delete('/', handleUnregister);
 
 export default router;

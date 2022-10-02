@@ -1,9 +1,19 @@
+import { User } from '@src/models';
+import { UserSchema } from '@src/models/schemas';
 import { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 
 const registerValidation = async (req:Request, res:Response) => {
   const validations = [
-    body('email').isEmail(),
+    body('name').isLength({ min: 1 }),
+    body('email').isEmail().custom((value: string) => {
+      const user = new User();
+      return user.findOne({ email: value })
+        .then((result: UserSchema) => {
+          if (result && result.id) { return Promise.reject(new Error('Email already exists')); }
+          return Promise.resolve();
+        });
+    }),
     body('password').isLength({ min: 5 }),
   ];
   return Promise.all(validations.map((callback) => callback(req, res, () => {})));

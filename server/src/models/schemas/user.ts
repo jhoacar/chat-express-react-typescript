@@ -1,43 +1,36 @@
-export type UserError = Error & { user: UserSchema };
-
 export interface UserSchema {
+  id: number;
   name: string,
   email: string,
-  password: string
+  password: string,
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface UserQuery {
-  name: string | undefined,
-  email: string | undefined
-  id: number | undefined
+  name?: string,
+  email?: string,
+  id?: number
 }
 
-export abstract class User implements UserSchema {
-  name: string;
+export abstract class User {
+  user: UserSchema;
 
-  email: string;
+  static schema: any | null;
 
-  password: string;
-
-  schema: any | null;
-
-  driver: any | null;
+  static driver: any | null;
 
   constructor(user: UserSchema) {
-    this.schema = null;
-    this.driver = null;
-    this.name = user.name;
-    this.email = user.email;
-    this.password = user.password;
+    this.user = user;
   }
 
-  abstract save():Promise<UserSchema | UserError>;
+  public abstract save():Promise<UserSchema | any>;
 
-  abstract find(user: UserQuery): Promise<Array<UserSchema | UserError>>;
+  public abstract find(user: UserQuery): Promise<Array<UserSchema | any>>;
 
-  abstract findOne(user: UserQuery):Promise<UserSchema | UserError>;
+  public abstract findOne(user: UserQuery):Promise<UserSchema | any>;
 
-  abstract updateOne(user: UserQuery, data: UserQuery):Promise<UserSchema | UserError>;
+  public abstract updateOne(user: UserQuery, data: UserQuery):Promise<UserSchema | any>;
 
-  abstract deleteOne(user: UserQuery):Promise<UserSchema | UserError>;
+  public abstract deleteOne(user: UserQuery):Promise<UserSchema | any>;
 }
