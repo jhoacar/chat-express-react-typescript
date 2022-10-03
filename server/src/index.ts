@@ -1,6 +1,6 @@
 import 'dotenv/config';
 // import open from 'open';
-import app from '@boot/server';
+import app from '@boot';
 import { initialization } from '@boot/database';
 import { port } from '@config/server';
 
