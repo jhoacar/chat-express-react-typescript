@@ -27,7 +27,7 @@ export const createSocketEmitter = () => new Proxy(emitters, {
 });
 
 export default class WebSocketService {
-  events = ['new-user', 'bye-user'];
+  events = ['connect', 'disconnect', 'new-user', 'bye-user'];
 
   socket: Socket;
 

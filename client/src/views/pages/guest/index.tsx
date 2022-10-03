@@ -20,12 +20,9 @@ function Guest() {
       video: true,
       audio: true,
     })
-      .then((source: any) => {
-        console.log(source);
-        const stream = window.URL.createObjectURL(source);
-
+      .then((stream: any) => {
+        console.log(stream);
         setCurrentStream(stream);
-
         addVideoUser(stream);
       })
       .catch((error) => {
@@ -44,6 +41,8 @@ function Guest() {
 
   const initSocket = () => {
     websocket.listener((eventName, data) => {
+      console.log(`Handle ${eventName} for: `, data);
+
       if (eventName === 'new-user') {
         const { idPeer } = data;
         sendCall(idPeer, currentStream);
@@ -54,6 +53,7 @@ function Guest() {
   const initPeer = () => {
     const { peer } = peerService;
     peer.on('open', (id) => {
+      console.log(`Peer connected - ID = ${id}`);
       const body = {
         idPeer: id,
         roomName: 'room',
@@ -83,8 +83,19 @@ function Guest() {
       {listUser.map((user, index) => (
         // eslint-disable-next-line react/no-array-index-key
         <div key={index}>
-          {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-          {user && <video src={user} autoPlay />}
+
+          {user && (
+          // eslint-disable-next-line jsx-a11y/media-has-caption
+          <video
+            ref={(video) => {
+              if (video) {
+                // eslint-disable-next-line no-param-reassign
+                video.srcObject = user;
+              }
+            }}
+            autoPlay
+          />
+          )}
         </div>
       ))}
     </div>
