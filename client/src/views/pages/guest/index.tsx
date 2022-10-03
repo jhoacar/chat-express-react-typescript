@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react';
-import io from 'socket.io-client';
-
-const server: string = import.meta.env.VITE_SERVER || '';
-const socket = io(server);
+import socket from '@services/websocket';
 
 function Guest() {
-  const [isConnected, setIsConnected] = useState<Boolean>(socket.connected);
-  const [lastPong, setLastPong] = useState<string | null>(null);
-
+  const [isConnected, setIsConnected] = useState(socket.connected);
+  const [lastPong, setLastPong] = useState('');
   useEffect(() => {
     socket.on('connect', () => {
       setIsConnected(true);
@@ -17,8 +13,8 @@ function Guest() {
       setIsConnected(false);
     });
 
-    socket.on('pong', () => {
-      setLastPong(() => new Date().toISOString());
+    socket.on('pong', (data) => {
+      setLastPong(JSON.stringify(data));
     });
 
     return () => {
@@ -29,7 +25,7 @@ function Guest() {
   }, []);
 
   const sendPing = () => {
-    socket.emit('ping');
+    socket.emit('ping', { message: 'Hello from client' });
   };
 
   return (

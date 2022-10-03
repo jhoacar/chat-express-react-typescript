@@ -5,11 +5,6 @@ import { BrowserRouter } from 'react-router-dom';
 // ** Toast
 import { Toaster } from 'react-hot-toast';
 
-// // ** PrismJS
-import 'prismjs';
-import 'prismjs/themes/prism-tomorrow.css';
-import 'prismjs/components/prism-jsx.min';
-
 // ** React Perfect Scrollbar
 import 'react-perfect-scrollbar/dist/css/styles.css';
 
