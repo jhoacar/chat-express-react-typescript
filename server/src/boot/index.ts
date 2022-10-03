@@ -1,3 +1,3 @@
-import websocket from '@boot/websocket';
+import server from '@boot/server';
 
-export default websocket;
+export default server;

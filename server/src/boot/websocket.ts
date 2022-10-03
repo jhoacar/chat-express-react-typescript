@@ -1,7 +1,7 @@
-import { createServer } from 'http';
 import { Server } from 'socket.io';
-import app from '@boot/server';
+import app from '@boot/app';
 import colors from 'colors/safe';
+import { createServer } from 'http';
 
 const server = createServer(app);
 

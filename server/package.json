@@ -1,18 +1,14 @@
 {
   "scripts": {
-    "start": "concurrently npm:start:*",
-    "start:peer": "npm run peer",
-    "start:server": "node dist",
+    "start": "node dist",
     "dev": "nodemon --exec \"npm run build && npm start || exit 1\" --ext .ts",
     "build": "tsc && tsc-alias",
     "lint": "npx eslint . --ext .ts",
-    "lint:fix": "npx eslint . --fix --ext .ts",
-    "peer": "peerjs --port 9000"
+    "lint:fix": "npx eslint . --fix --ext .ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
-    "concurrently": "^7.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.18.1",
