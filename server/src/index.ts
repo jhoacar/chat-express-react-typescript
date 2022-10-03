@@ -2,10 +2,18 @@ import 'dotenv/config';
 // import open from 'open';
 import app from '@boot';
 import { initialization } from '@boot/database';
-import { port } from '@config/server';
+import { port as serverPort } from '@config/server';
+import { port as peerPort } from '@config/peer';
+import { PeerServer } from 'peer';
 
-app.listen(port, () => {
+app.listen(serverPort, () => {
   initialization();
-  // open(`http://localhost:${port}`);
-  console.log(`Server on http://localhost:${port}`);
+  // open(`http://localhost:${serverPort}`);
+  console.log(`Server on http://localhost:${serverPort}`);
+});
+
+PeerServer({
+  port: peerPort as number,
+}, () => {
+  console.log(`Peer Server on http://localhost:${peerPort}`);
 });
