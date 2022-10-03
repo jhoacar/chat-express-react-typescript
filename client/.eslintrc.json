@@ -20,6 +20,7 @@
     "rules": {
         "no-console": "off",
         "react/react-in-jsx-scope": "off",
-        "react/button-has-type": "off"
+        "react/button-has-type": "off",
+        "radix": "off"
     }
 }
