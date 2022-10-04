@@ -2,39 +2,50 @@ import {
   Anchor,
   Box,
   Header,
-  Image,
   Menu,
   Nav,
   ResponsiveContext,
+  Text,
 } from 'grommet';
 
-export function NavBar({ ...props }) {
+import { Chat } from 'grommet-icons';
+
+export function NavBar() {
   return (
-    <div {...props}>
-      <Header background="dark-1" pad="medium">
-        <Box direction="row" align="center" gap="small">
-          <Image src="/icon.svg" width="50px" height="50px" />
-          <Header>Web App for VideoChat ( WebRTC )</Header>
-        </Box>
+    <Box background="dark-1" pad="medium" direction="row" align="center" justify="between">
+      <Box direction="row" align="center" gap="small">
         <ResponsiveContext.Consumer>
-          {(responsive) => (responsive === 'small' ? (
-            <Menu
-              label="Click me"
-              items={[
-                { label: 'This is', onClick: () => { } },
-                { label: 'The Menu', onClick: () => { } },
-                { label: 'Component', onClick: () => { } },
-              ]}
-            />
-          ) : (
-            <Nav direction="row">
-              <Anchor href="/login" label="Sign In" />
-              <Anchor href="/register" label="Sign Up" />
-            </Nav>
-          ))}
+          {(size) => (
+            <Header>
+              <Chat size="medium" color="green" />
+              <Text size={size}>
+                {(size === 'small' || size === 'xsmall') && 'VideoChat'}
+                {(size !== 'small' && size !== 'xsmall') && 'Web App for VideoChat ( WebRTC )'}
+              </Text>
+            </Header>
+          )}
         </ResponsiveContext.Consumer>
-      </Header>
-    </div>
+
+      </Box>
+      <ResponsiveContext.Consumer>
+        {(responsive) => (responsive === 'small' ? (
+          <Menu
+            size={responsive}
+            label="Click me"
+            items={[
+              { label: 'This is', onClick: () => { } },
+              { label: 'The Menu', onClick: () => { } },
+              { label: 'Component', onClick: () => { } },
+            ]}
+          />
+        ) : (
+          <Nav direction="row">
+            <Anchor size={responsive} href="/login" label="Sign In" />
+            <Anchor size={responsive} href="/register" label="Sign Up" />
+          </Nav>
+        ))}
+      </ResponsiveContext.Consumer>
+    </Box>
   );
 }
 

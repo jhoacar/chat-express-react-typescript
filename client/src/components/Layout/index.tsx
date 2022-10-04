@@ -9,14 +9,18 @@ import styles from './index.module.scss';
 export function Layout({ children }: LayoutProps) {
   return (
     <Grommet className={styles.grommet}>
-      <SideBar className={styles.sidebar} />
-      <main className={styles.main}>
-        <NavBar className={styles.navbar} />
-        <div className={styles.content}>
-          {children}
-        </div>
-        <Footer className={styles.footer} />
-      </main>
+      <header className={styles.header}>
+        <NavBar />
+      </header>
+      <article className={styles.article}>
+        {children}
+      </article>
+      <aside className={styles.sidebar}>
+        <SideBar />
+      </aside>
+      <footer className={styles.footer}>
+        <Footer />
+      </footer>
     </Grommet>
   );
 }

@@ -1,8 +1,10 @@
+import Layout from '@components/Layout';
+
 function Error() {
   return (
-    <div>
+    <Layout>
       Error
-    </div>
+    </Layout>
   );
 }
 

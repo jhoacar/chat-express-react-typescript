@@ -1,4 +1,5 @@
-import React, { Suspense } from 'react';
+import { Spinner } from 'grommet';
+import { Suspense } from 'react';
 
 // ** Router Import
 import Router from './router/Router';
@@ -7,7 +8,7 @@ import Router from './router/Router';
 
 function App() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Spinner />}>
       <Router />
     </Suspense>
   );

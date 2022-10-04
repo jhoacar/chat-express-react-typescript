@@ -4,7 +4,7 @@ export function Home() {
   return (
     <Layout>
       <div>
-        Home
+        WebRTC
       </div>
     </Layout>
   );
