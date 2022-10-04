@@ -9,6 +9,7 @@ import '@assets/scss/main.scss';
 
 // ** React Perfect Scrollbar
 import 'react-perfect-scrollbar/dist/css/styles.css';
+import Spinner from '@components/Spinner';
 
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'));
@@ -19,7 +20,7 @@ const root = createRoot(container!);
 
 root.render(
   <BrowserRouter>
-    <Suspense fallback={<div>Cargando</div>}>
+    <Suspense fallback={<Spinner />}>
       <LazyApp />
       <Toaster position="top-right" toastOptions={{ className: 'react-hot-toast' }} />
     </Suspense>

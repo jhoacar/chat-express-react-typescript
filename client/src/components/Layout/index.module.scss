@@ -1,0 +1,36 @@
+:root {
+  --sidebar-width: 70px;
+  --navbar-height: 50px;
+  --footer-height: 50px;
+}
+
+.grommet {
+  height: 100%;
+}
+
+.sidebar {
+  max-width: var(--sidebar-width);
+  position: fixed;
+  height: 100%;
+}
+
+.navbar {
+  min-height: var(--navbar-height);
+}
+
+.footer {
+  min-height: var(--footer-height);
+  margin-top: auto;
+}
+
+.content{
+  padding: 1rem;
+}
+
+.main {
+  height: 100%;
+  margin-left: var(--sidebar-width);
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}

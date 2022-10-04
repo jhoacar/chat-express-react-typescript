@@ -1,20 +1,23 @@
 import { ReactNode } from 'react';
+import { NavBar } from '@components/NavBar';
 
-import './index.scss';
+import { Footer } from '@components/Footer';
+import { Grommet } from 'grommet';
+import SideBar from '@components/SideBar';
+import styles from './index.module.scss';
 
-export function Layout({ children }:LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   return (
-    <>
-      <header contentEditable>
-        Header
-      </header>
-      <main contentEditable>
-        {children}
+    <Grommet className={styles.grommet}>
+      <SideBar className={styles.sidebar} />
+      <main className={styles.main}>
+        <NavBar className={styles.navbar} />
+        <div className={styles.content}>
+          {children}
+        </div>
+        <Footer className={styles.footer} />
       </main>
-      <footer contentEditable>
-        Footer
-      </footer>
-    </>
+    </Grommet>
   );
 }
 

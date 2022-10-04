@@ -1,37 +1,28 @@
-import { Box, ResponsiveContext, Text } from 'grommet';
+import {
+  Anchor, Box, ResponsiveContext, Text,
+} from 'grommet';
 
-import { Logo, SocialMedia } from '@components';
-import { FooterContent } from './FooterContent';
-
-function Footer({ ...rest }) {
+function Footer({ ...props }) {
   return (
-    <footer>
+    <footer {...props}>
       <ResponsiveContext.Consumer>
         {(size) => (
           <Box
+            background="dark-1"
             direction="row"
-            justify="between"
-            border={{ side: 'top', color: 'light-4' }}
-            pad={{ top: 'xlarge' }}
-            {...rest}
+            justify="center"
+            height="100%"
+            pad={{ top: 'medium', bottom: 'medium' }}
           >
-            <Box gap="large" align="start">
-              <Box
-                gap="small"
-                direction="row-responsive"
-                align="center"
-                pad={{ horizontal: 'small' }}
-              >
-                <Logo />
-                {size !== 'small' && size !== 'xsmall' && (
-                <Text weight="bold" size="large">
-                  App Teaser
-                </Text>
-                )}
-              </Box>
-              <SocialMedia />
-            </Box>
-            <FooterContent />
+            {size !== 'small' && size !== 'xsmall' && (
+              <Text weight="bold" size="medium">
+                <span>Page made by Jhoan Carrero - </span>
+                <Anchor href="https://github.com/jhoacar">
+                  https://github.com/jhoacar
+                </Anchor>
+              </Text>
+            )}
+
           </Box>
         )}
       </ResponsiveContext.Consumer>

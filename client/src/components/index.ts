@@ -1,3 +1,3 @@
 export * from './Logo';
-export * from './NavHeader';
+export * from './NavBar';
 export * from './SocialMedia';
