@@ -21,6 +21,9 @@
         "no-console": "off",
         "react/react-in-jsx-scope": "off",
         "react/button-has-type": "off",
-        "radix": "off"
+        "radix": "off",
+        "import/prefer-default-export": "off",
+        "react/no-array-index-key": "off",
+        "react/jsx-props-no-spreading": "off"
     }
 }

@@ -26,6 +26,15 @@
       ],
       "@services/*": [
         "services/*"
+      ],
+      "@components/*": [
+        "components/*"
+      ],
+      "@components": [
+        "components"
+      ],
+      "@assets/*": [
+        "assets/*"
       ]
     }
   },
