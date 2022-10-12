@@ -1,57 +1,29 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "target": "es2016",
-    "module": "commonjs",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "skipLibCheck": true,
-    "outDir": "dist",
-    "baseUrl": "src",
-    "paths": {
-      "@rootDir": [
-        "dirname.ts"
-      ],
-      "@client": [
-        "client.dirname.ts"
-      ],
-      "@routes/*": [
-        "routes/*",
-      ],
-      "@routes": [
-        "routes",
-      ],
-      "@controllers/*": [
-        "controllers/*"
-      ],
-      "@models/*": [
-        "models/*"
-      ],
-      "@models": [
-        "models"
-      ],
-      "@views/*": [
-        "views/*"
-      ],
-      "@middlewares/*": [
-        "middlewares/*"
-      ],
-      "@boot": [
-        "boot"
-      ],
-      "@boot/*": [
-        "boot/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
-      "@config/*": [
-        "config/*"
-      ],
-    }
-  },
-  "include": [
-    "src"
-  ],
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "target": "es2016",
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "forceConsistentCasingInFileNames": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "outDir": "dist",
+        "baseUrl": "src",
+        "paths": {
+            "@rootDir": ["dirname.ts"],
+            "@client": ["client.dirname.ts"],
+            "@routes/*": ["routes/*"],
+            "@routes": ["routes"],
+            "@controllers/*": ["controllers/*"],
+            "@models/*": ["models/*"],
+            "@models": ["models"],
+            "@views/*": ["views/*"],
+            "@middlewares/*": ["middlewares/*"],
+            "@boot": ["boot"],
+            "@boot/*": ["boot/*"],
+            "@utils/*": ["utils/*"],
+            "@config/*": ["config/*"]
+        }
+    },
+    "include": ["src"]
 }

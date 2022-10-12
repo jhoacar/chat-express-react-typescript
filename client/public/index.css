@@ -1,27 +1,32 @@
-html{ height:100%; }
-body { min-height:100%;  margin:0; }
-
-header {
-  height: 50px;
-  background: lightcyan;
+html {
+    height: 100%;
+}
+body {
+    min-height: 100%;
+    margin: 0;
 }
 
-article { 
-  height: 1%;
+header {
+    height: 50px;
+    background: lightcyan;
+}
+
+article {
+    height: 1%;
 }
 
 footer {
-  height: 50px;
-  background: PapayaWhip;
+    height: 50px;
+    background: PapayaWhip;
 }
 
 /**** Trick: ****/
 
 body {
-  display: table;
-  width: 100%; 
+    display: table;
+    width: 100%;
 }
 
 body > footer {
-   display: table-row;
+    display: table-row;
 }

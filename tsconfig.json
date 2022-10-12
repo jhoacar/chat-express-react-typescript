@@ -1,8 +1,4 @@
 {
-    "compilerOptions": {
-    },
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+    "compilerOptions": {},
+    "exclude": ["node_modules", "dist"]
 }

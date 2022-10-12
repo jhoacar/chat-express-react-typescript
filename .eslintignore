@@ -1,0 +1,5 @@
+/**/node_modules
+/**/dist
+jest.config.js
+client/env.d.ts
+client/vite.config.ts

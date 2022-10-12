@@ -1,9 +1,9 @@
-import { Router, static as Static } from 'express';
+import { Router, static as Static } from 'express'
 
-import clientDirname from '@client';
+import clientDirname from '@client'
 
-const router = Router();
+const router = Router()
 
-router.use(Static(clientDirname));
+router.use(Static(clientDirname))
 
-export default router;
+export default router

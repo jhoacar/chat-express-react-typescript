@@ -1,10 +1,10 @@
-import express from 'express';
-import morgan from 'morgan';
-import router from '@routes';
+import express from 'express'
+import morgan from 'morgan'
+import router from '@routes'
 
-const app = express();
+const app = express()
 
-app.use(morgan('combined'));
-app.use(router);
+app.use(morgan('combined'))
+app.use(router)
 
-export default app;
+export default app

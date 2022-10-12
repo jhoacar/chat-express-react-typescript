@@ -1,37 +1,37 @@
 :root {
-  --sidebar-width: 70px;
-  --navbar-height: 50px;
-  --footer-height: 50px;
+    --sidebar-width: 70px;
+    --navbar-height: 50px;
+    --footer-height: 50px;
 }
 
 /*
   - Layout using CSS Grid ( https://codepen.io/flaviocopes/pen/JZWOEK )
 */
 .grommet {
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 100fr;
-  grid-template-rows: 1fr 100fr 1fr;
-  grid-template-areas:
-    "header  header"
-    "sidebar content"
-    "footer  footer";
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 100fr;
+    grid-template-rows: 1fr 100fr 1fr;
+    grid-template-areas:
+        'header  header'
+        'sidebar content'
+        'footer  footer';
 }
 
 .sidebar {
-  grid-area: sidebar;
-  max-width: var(--sidebar-width);
+    grid-area: sidebar;
+    max-width: var(--sidebar-width);
 }
 
 .header {
-  grid-area: header;
-  width: 100%;
+    grid-area: header;
+    width: 100%;
 }
 
 .footer {
-  grid-area: footer;
+    grid-area: footer;
 }
 
 .article {
-  grid-area: content;
+    grid-area: content;
 }
