@@ -8,13 +8,12 @@
         "airbnb-base",
         "airbnb-typescript/base"
     ],
-    "overrides": [
-    ],
+    "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "project":"./tsconfig.json"
+        "project": "tsconfig.json"
     },
     "rules": {
-        "no-console":"off"
+        "no-console": "off"
     }
 }

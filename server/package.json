@@ -3,8 +3,9 @@
     "start": "node dist",
     "dev": "nodemon --exec \"npm run build && npm start || exit 1\" --ext .ts",
     "build": "tsc && tsc-alias",
-    "lint": "npx eslint . --ext .ts",
-    "lint:fix": "npx eslint . --fix --ext .ts",
+    "lint:fix": "npm run lint:fix:src && npm run lint:fix:test",
+    "lint:fix:src": "npx eslint src --fix --ext .ts",
+    "lint:fix:test":"npx eslint test -c .eslintrc.test.json --fix --ext .ts",
     "test": "jest"
   },
   "dependencies": {
