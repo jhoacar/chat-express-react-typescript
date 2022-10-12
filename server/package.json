@@ -5,7 +5,7 @@
     "build": "tsc && tsc-alias",
     "lint:fix": "npm run lint:fix:src && npm run lint:fix:test",
     "lint:fix:src": "npx eslint src --fix --ext .ts",
-    "lint:fix:test":"npx eslint test -c .eslintrc.test.json --fix --ext .ts",
+    "lint:fix:test": "npx eslint test -c .eslintrc.test.json --fix --ext .ts",
     "test": "jest"
   },
   "dependencies": {
