@@ -1,15 +1,15 @@
-import Peer from 'peerjs'
+import Peer from 'peerjs';
 
-const host: string = import.meta.env.VITE_PEER_HOST || 'localhost'
-const port: number = parseInt(import.meta.env.VITE_PEER_PORT || '9000')
+const host: string = import.meta.env.VITE_PEER_HOST || 'localhost';
+const port: number = parseInt(import.meta.env.VITE_PEER_PORT || '9000');
 
 export default class PeerService {
-    peer: Peer
+  peer: Peer;
 
-    constructor() {
-        this.peer = new Peer({
-            host,
-            port,
-        })
-    }
+  constructor() {
+    this.peer = new Peer({
+      host,
+      port,
+    });
+  }
 }

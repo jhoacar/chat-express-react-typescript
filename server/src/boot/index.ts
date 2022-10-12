@@ -1,3 +1,3 @@
-import server from '@boot/server'
+import server from '@boot/server';
 
-export default server
+export default server;

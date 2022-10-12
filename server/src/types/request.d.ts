@@ -1,9 +1,9 @@
-import { UserSchema } from '@models/schemas'
+import { UserSchema } from '@models/schemas';
 
 declare global {
-    namespace Express {
-        interface Request {
-            user?: UserSchema
-        }
+  namespace Express {
+    interface Request {
+      user?: UserSchema
     }
+  }
 }

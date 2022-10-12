@@ -1,9 +1,9 @@
-import { handleChat } from '@controllers/chat'
-import { authMiddleware } from '@middlewares/auth'
-import { Router } from 'express'
+import { handleChat } from '@controllers/chat';
+import { authMiddleware } from '@middlewares/auth';
+import { Router } from 'express';
 
-const router = Router()
+const router = Router();
 
-router.get('/', authMiddleware, handleChat)
+router.get('/', authMiddleware, handleChat);
 
-export default router
+export default router;

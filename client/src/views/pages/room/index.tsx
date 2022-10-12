@@ -1,7 +1,7 @@
-import Layout from '@components/Layout'
+import Layout from '@components/Layout';
 
 function Room() {
-    return <Layout>Room</Layout>
+  return <Layout>Room</Layout>;
 }
 
-export default Room
+export default Room;

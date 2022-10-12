@@ -1,8 +1,8 @@
-import { handleLogin } from '@controllers/auth'
-import { loginMiddleware } from '@middlewares/auth'
-import { Router } from 'express'
+import { handleLogin } from '@controllers/auth';
+import { loginMiddleware } from '@middlewares/auth';
+import { Router } from 'express';
 
-const router = Router()
+const router = Router();
 
 /**
  * @swagger
@@ -37,6 +37,6 @@ const router = Router()
  *                  example: {"message":"User logged succesfully", "body": {"token":"..."}}
  *
  */
-router.post('/login', loginMiddleware, handleLogin)
+router.post('/login', loginMiddleware, handleLogin);
 
-export default router
+export default router;

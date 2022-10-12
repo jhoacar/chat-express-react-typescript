@@ -1,1 +1,1 @@
-export default __dirname
+export default __dirname;

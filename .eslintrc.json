@@ -5,8 +5,7 @@
         "node": true,
         "es2021": true
     },
-    "extends": ["airbnb", "airbnb-typescript", "prettier"],
-    "plugins": ["prettier"],
+    "extends": ["airbnb", "airbnb-typescript"],
     "overrides": [],
     "parserOptions": {
         "ecmaVersion": "latest",
@@ -18,7 +17,6 @@
         ]
     },
     "rules": {
-        "prettier/prettier": "error",
         "no-console": "off",
         "react/react-in-jsx-scope": "off",
         "react/button-has-type": "off",
