@@ -29,7 +29,10 @@
         "build": "concurrently npm:build:*",
         "build:server": "cd server && npm run build",
         "build:client": "cd client && npm run build",
+        "lint:check": "npx eslint .",
         "lint:fix": "npx eslint --fix .",
+        "format:check": "npx prettier --check .",
+        "format:write": "npx prettier --write .",
         "test": "jest"
     },
     "keywords": [],
