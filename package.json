@@ -17,7 +17,7 @@
     }
   ],
   "scripts": {
-    "prepare": "concurrently npm:install:*",
+    "prepare": "concurrently npm:install:* && husky install",
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
     "dev": "concurrently npm:dev:*",
@@ -39,6 +39,7 @@
     "concurrently": "^7.4.0"
   },
   "devDependencies": {
+    "husky": "^8.0.1",
     "lint-staged": "^13.0.3"
   }
 }
