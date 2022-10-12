@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "name": "fullstack-project",
   "version": "1.0.0",
   "description": "This is a project using typescript",
@@ -30,7 +31,8 @@
     "build:client": "cd client && npm run build",
     "lint:fix": "concurrently npm:lint:fix:*",
     "lint:fix:client": "cd client && npm run lint:fix",
-    "lint:fix:server": "cd server && npm run lint:fix"
+    "lint:fix:server": "cd server && npm run lint:fix",
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -39,7 +41,9 @@
     "concurrently": "^7.4.0"
   },
   "devDependencies": {
+    "colors": "^1.4.0",
     "husky": "^8.0.0",
+    "jest": "^29.1.2",
     "lint-staged": "^13.0.3"
   }
 }

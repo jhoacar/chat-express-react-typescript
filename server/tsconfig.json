@@ -6,15 +6,15 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "skipLibCheck": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    "baseUrl": "./src",
+    "outDir": "dist",
+    "rootDir": "src",
+    "baseUrl": "src",
     "paths": {
       "@rootDir": [
-        "./dirname.ts"
+        "dirname.ts"
       ],
       "@client": [
-        "./client.dirname.ts"
+        "client.dirname.ts"
       ],
       "@routes/*": [
         "routes/*",
@@ -52,7 +52,8 @@
     }
   },
   "include": [
-    "./src/**/*.ts"
+    "src",
+    "test"
   ],
   "exclude": [
     "node_modules",
