@@ -4,7 +4,7 @@
     "dev": "nodemon --exec \"npm run build && npm start || exit 1\" --ext .ts",
     "build": "tsc && tsc-alias",
     "lint": "npx eslint . --ext .ts",
-    "lint:fix": "npx eslint --fix",
+    "lint:fix": "npx eslint . --fix --ext .ts",
     "test": "jest"
   },
   "dependencies": {

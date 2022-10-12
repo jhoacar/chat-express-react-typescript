@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "lint:fix": "npx eslint --fix",
+    "lint:fix": "npx eslint . --fix --ext .ts,.tsx",
     "test": "jest"
   },
   "dependencies": {
