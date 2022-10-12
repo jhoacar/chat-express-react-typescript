@@ -17,28 +17,28 @@
     }
   ],
   "scripts": {
-    "postinstall": "concurrently npm:install:*",
+    "prepare": "concurrently npm:install:*",
     "install:server": "cd server && npm install",
     "install:client": "cd client && npm install",
     "dev": "concurrently npm:dev:*",
-    "dev:server": "env-cmd -f server.env npm run dev-server",
-    "dev-server": "npm run build:client && cd server && npm run dev",
-    "dev:client": "env-cmd -f client.env npm run dev-client",
-    "dev-client": "cd client && npm run dev",
-    "start": "env-cmd -f server.env npm run start-server",
-    "start-server": "concurrently npm:build:* && cd server && npm start",
+    "dev:server": "npm run build:client && cd server && npm run dev",
+    "dev:client": "cd client && npm run dev",
+    "start": "npm run start:server",
+    "start:server": "cd server && npm start",
+    "build": "concurrently npm:build:*",
     "build:server": "cd server && npm run build",
-    "build:client": "env-cmd -f client.env npm run build-client",
-    "build-client": "cd client && npm run build",
-    "lint": "eslint --fix ."
+    "build:client": "cd client && npm run build",
+    "lint:fix": "concurrently npm:lint:fix:*",
+    "lint:fix:client": "cd client && npm run lint:fix",
+    "lint:fix:server": "cd server && npm run lint:fix"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "concurrently": "^7.4.0",
-    "env-cmd": "^10.1.0"
+    "concurrently": "^7.4.0"
   },
   "devDependencies": {
+    "lint-staged": "^13.0.3"
   }
 }

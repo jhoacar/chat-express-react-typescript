@@ -17,8 +17,8 @@ function Footer() {
           <Text size={size} textAlign="center">
             <span>Source code in </span>
             {(size === 'small' || size === 'xsmall') && <br />}
-            <Anchor href="https://github.com/jhoacar">
-              https://github.com/jhoacar
+            <Anchor href="https://github.com/jhoacar/chat-express-react-typescript">
+              https://github.com/jhoacar/chat-express-react-typescript
             </Anchor>
           </Text>
 

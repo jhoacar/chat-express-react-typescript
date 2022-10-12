@@ -1,0 +1,4 @@
+{
+    "client/**/*.{ts,tsx}": "npm run lint:fix:client",
+    "server/**/*.ts": "npm run lint:fix:server"
+}

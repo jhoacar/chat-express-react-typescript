@@ -2,18 +2,20 @@ import { ReactNode } from 'react';
 import { NavBar } from '@components/NavBar';
 
 import { Footer } from '@components/Footer';
-import { Grommet } from 'grommet';
+import { Card, Grommet } from 'grommet';
 import SideBar from '@components/SideBar';
 import styles from './index.module.scss';
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children, ...rest }: any) {
   return (
     <Grommet className={styles.grommet}>
       <header className={styles.header}>
         <NavBar />
       </header>
       <article className={styles.article}>
-        {children}
+        <Card round="none" height="100%" {...rest}>
+          {children}
+        </Card>
       </article>
       <aside className={styles.sidebar}>
         <SideBar />

@@ -1,13 +1,12 @@
-import { Heading, Spinner as BaseSpinner } from 'grommet';
-
 import styles from './index.module.scss';
 
 export function Spinner() {
   return (
-    <div className={styles['spinner-container']}>
-      <div className={styles['spinner-content']}>
-        <Heading margin="none">Loading</Heading>
-        <BaseSpinner height="100px" width="100px" />
+    <div className={styles['fallback-spinner']}>
+      <div className={styles.loading}>
+        <div className={`${styles.effects} ${styles['effect-1']}`} />
+        <div className={`${styles.effects} ${styles['effect-2']}`} />
+        <div className={`${styles.effects} ${styles['effect-3']}`} />
       </div>
     </div>
   );
