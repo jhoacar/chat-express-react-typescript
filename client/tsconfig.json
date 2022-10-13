@@ -24,7 +24,17 @@
             "@components": ["components"],
             "@assets/*": ["assets/*"],
             "@layouts": ["layouts"],
-            "@layouts/*": ["layouts/*"]
+            "@layouts/*": ["layouts/*"],
+            "@middlewares/*": ["middlewares/*"],
+            "@middlewares": ["middlewares"],
+            "@pages/*": ["pages/*"],
+            "@pages": ["pages"],
+            "@router/*": ["router/*"],
+            "@router": ["router"],
+            "@utils/*": ["utils/*"],
+            "@utils": ["utils"],
+            "@contexts/*": ["contexts/*"],
+            "@contexts": ["contexts"]
         }
     },
     "include": ["src", "test"],
