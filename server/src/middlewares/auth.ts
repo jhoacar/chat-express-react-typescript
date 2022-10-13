@@ -13,7 +13,7 @@ const loginValidation = async (req: Request, res: Response) => {
   );
 };
 
-export const loginMiddleware = async (
+export const login = async (
   req: Request,
   res: Response,
   nxt: NextFunction,
@@ -28,7 +28,7 @@ export const loginMiddleware = async (
   return nxt();
 };
 
-export const authMiddleware = (
+export const auth = (
   req: Request,
   res: Response,
   nxt: NextFunction,
@@ -37,13 +37,13 @@ export const authMiddleware = (
     const jwt = req.headers.authorization as string;
 
     if (!jwt) {
-      return res.status(400).json({ errors: ['Token is required'] });
+      return res.status(400).json({ errors: [{ message: 'Token is required' }] });
     }
 
     req.user = validateJWT(jwt) as UserSchema;
 
     if (!req.user) {
-      return res.status(400).json({ errors: ['Token invalid'] });
+      return res.status(400).json({ errors: [{ message: 'Token invalid' }] });
     }
 
     return nxt();

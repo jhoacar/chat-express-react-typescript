@@ -1,20 +1,20 @@
 import {
-  handleGetUser,
-  handleGetUsers,
-  handleRegister,
-  handleUnregister,
+  show,
+  index,
+  create,
+  destroy,
 } from '@controllers/user';
 import {
-  userRegisterMiddleware,
-  userUnregisterMiddleware,
+  create as createMiddleware,
+  destroy as destroyMiddleware,
 } from '@middlewares/user';
 import { Router } from 'express';
 
 const router = Router();
 
-router.get('/', handleGetUsers);
+router.get('/', index);
 
-router.get('/:id', handleGetUser);
+router.get('/:id', show);
 
 /**
  * @swagger
@@ -62,8 +62,8 @@ router.get('/:id', handleGetUser);
  *                  type: json
  *                  example: {"message":"User registered succesfully"}
  */
-router.post('/', userRegisterMiddleware, handleRegister);
+router.post('/', createMiddleware, create);
 
-router.delete('/', userUnregisterMiddleware, handleUnregister);
+router.delete('/', destroyMiddleware, destroy);
 
 export default router;

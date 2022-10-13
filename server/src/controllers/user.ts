@@ -4,7 +4,7 @@ import { User } from '@models/schemas';
 import { encryptPassword } from '@utils/bcrypt';
 import { Request, Response } from 'express';
 
-export const handleRegister = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const userInstance: User = new UserModel(req.body);
 
@@ -27,7 +27,7 @@ export const handleRegister = async (req: Request, res: Response) => {
   }
 };
 
-export const handleUnregister = async (req: Request, res: Response) => {
+export const destroy = async (req: Request, res: Response) => {
   try {
     const userInstance: User = new UserModel();
 
@@ -46,7 +46,7 @@ export const handleUnregister = async (req: Request, res: Response) => {
   }
 };
 
-export const handleGetUsers = async (req: Request, res: Response) => {
+export const index = async (req: Request, res: Response) => {
   try {
     const userInstance: User = new UserModel();
 
@@ -65,7 +65,7 @@ export const handleGetUsers = async (req: Request, res: Response) => {
   }
 };
 
-export const handleGetUser = async (req: Request, res: Response) => {
+export const show = async (req: Request, res: Response) => {
   try {
     const userInstance: User = new UserModel();
 

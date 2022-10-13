@@ -5,7 +5,7 @@ import { User } from '@models/schemas';
 import { getJWT } from '@utils/jwt';
 import { decryptPassword } from '@utils/bcrypt';
 
-export const handleLogin = async (req: Request, res: Response) => {
+export const create = async (req: Request, res: Response) => {
   try {
     const userInstance: User = new UserModel();
 

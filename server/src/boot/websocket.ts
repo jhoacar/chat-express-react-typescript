@@ -2,6 +2,8 @@ import { Server } from 'socket.io';
 import app from '@boot/app';
 import colors from 'colors/safe';
 import { createServer } from 'http';
+import { auth } from '@middlewares/auth';
+import { wrapper } from '@utils/socket';
 
 const server = createServer(app);
 
@@ -9,7 +11,10 @@ const io = new Server(server, {
   cors: {
     origin: '*',
   },
+  path: '/api/socket',
 });
+
+io.use(wrapper(auth));
 
 io.on('connection', (socket) => {
   const { address, issued } = socket.handshake;
@@ -20,7 +25,7 @@ io.on('connection', (socket) => {
 
   socket.on('ping', (data: any) => {
     console.log(
-      `User (${address} - ${new Date(issued)})  sent a ping: \n`,
+      `User (${address} - ${new Date(issued)}) sent a ping: \n`,
       data,
     );
     socket.emit('pong', { message: 'Hello from server' });

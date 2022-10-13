@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 import { Request, Response } from 'express';
 
-export const handleChat = async (req: Request, res: Response) => {
+export const index = async (req: Request, res: Response) => {
   try {
     return res.status(200).send({
       message: 'You are in chat',

@@ -55,7 +55,7 @@ const deleteValidation = async (req: Request, res: Response) => {
   );
 };
 
-export const userRegisterMiddleware = async (
+export const create = async (
   req: Request,
   res: Response,
   nxt: NextFunction,
@@ -70,7 +70,7 @@ export const userRegisterMiddleware = async (
   return nxt();
 };
 
-export const userUnregisterMiddleware = async (
+export const destroy = async (
   req: Request,
   res: Response,
   nxt: NextFunction,

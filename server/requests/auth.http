@@ -1,9 +1,9 @@
 ### Get All Users
-GET /api/v1/user
+GET /api/v1/users
 Host: localhost:8888
 
 ### Register New User
-POST /api/v1/user
+POST /api/v1/users
 Host: localhost:8888
 Content-Type: application/json
 
@@ -35,5 +35,5 @@ Content-Type: application/json
 ### Chat for the user
 GET /api/v1/chat
 Host: localhost:8888
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJqaG9hbiIsImVtYWlsIjoiamhvYW5AZ21haWwuY29tIiwiY3JlYXRlZEF0IjoiMjAyMi0xMC0wMlQyMTowODo1MS4wMDBaIiwidXBkYXRlZEF0IjoiMjAyMi0xMC0wMlQyMTowODo1MS4wMDBaIiwiaWF0IjoxNjY0NzQ1NzQxLCJleHAiOjE2NjQ3NDkzNDF9.d9iy399nL6N1cobPMvzFbksGf3Sp5cqSMHYpCDUHcM8
+Authorization: eyJ
 Content-Type: application/json
