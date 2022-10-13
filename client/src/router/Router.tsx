@@ -5,10 +5,10 @@ import { lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
 
 // ** Components
-const Error = lazy(() => import('../views/pages/error'));
+const Error = lazy(() => import('../pages/error'));
 
-const Home = lazy(() => import('../views/pages/home'));
-const Room = lazy(() => import('../views/pages/room'));
+const Home = lazy(() => import('../pages/home'));
+const Room = lazy(() => import('../pages/room'));
 
 const Router = () => {
   const routes = useRoutes([
