@@ -1,5 +1,5 @@
-import { create } from '@controllers/auth';
-import { login } from '@middlewares/auth';
+import { create, validate } from '@controllers/auth';
+import { auth, login } from '@middlewares/auth';
 import { Router } from 'express';
 
 const router = Router();
@@ -38,5 +38,7 @@ const router = Router();
  *
  */
 router.post('/login', login, create);
+
+router.post('/validate', auth, validate);
 
 export default router;

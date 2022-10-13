@@ -41,3 +41,10 @@ export const create = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const validate = async (req: Request, res: Response) => res.status(200).send({
+  message: 'User logged in succesfully',
+  body: {
+    user: { ...req.user, password: undefined },
+  },
+});
