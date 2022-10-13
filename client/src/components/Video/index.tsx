@@ -2,25 +2,11 @@
 import { useState, useEffect } from 'react';
 import WebSocketService from '@services/websocket';
 import PeerService from '@services/peer';
-import {
-  Avatar,
-  Box,
-  Button,
-  Header,
-  Heading,
-  Main,
-  Menu,
-  Nav,
-  Page,
-  PageContent,
-  Paragraph,
-  Sidebar,
-} from 'grommet';
 
 const websocket = new WebSocketService();
 const peerService = new PeerService();
 
-function Guest() {
+export function Video() {
   const [currentStream, setCurrentStream] = useState<any>();
   const [listUser, setListUser] = useState<Array<any>>([]);
 
@@ -99,35 +85,8 @@ function Guest() {
   // }, []);
 
   return (
-    <Box>
-      <Header background="brand">
-        <Button hoverIndicator />
-        <Menu label="account" items={[{ label: 'logout' }]} />
-      </Header>
-      <Sidebar
-        background="brand"
-        round="small"
-        header={
-          <Avatar src="//s.gravatar.com/avatar/b7fb138d53ba0f573212ccce38a7c43b?s=80" />
-                }
-        footer={<Button hoverIndicator />}
-      >
-        <Nav gap="small">
-          <Button hoverIndicator />
-          <Button hoverIndicator />
-        </Nav>
-      </Sidebar>
-      <Page kind="narrow">
-        <PageContent background="light-3">
-          <Paragraph>Some content</Paragraph>
-        </PageContent>
-      </Page>
-      <Main>
-        <Heading>Something</Heading>
-        <Paragraph>Something about something</Paragraph>
-      </Main>
-    </Box>
+    <div>Video</div>
   );
 }
 
-export default Guest;
+export default Video;

@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 
 import '@assets/scss/main.scss';
+import './index.css';
 
 // ** React Perfect Scrollbar
 import 'react-perfect-scrollbar/dist/css/styles.css';

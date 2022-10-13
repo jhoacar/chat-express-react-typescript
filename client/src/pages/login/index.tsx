@@ -1,11 +1,11 @@
 import Layout from '@components/Layout';
 
-function Room() {
+function Login() {
   return (
     <Layout>
-      Room
+      Login
     </Layout>
   );
 }
 
-export default Room;
+export default Login;

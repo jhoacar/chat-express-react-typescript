@@ -1,12 +1,9 @@
-// ** Router imports
 import { lazy } from 'react';
-
-// ** Router imports
 import { useRoutes } from 'react-router-dom';
 
 // ** Components
 const Error = lazy(() => import('../pages/error'));
-
+const Login = lazy(() => import('../pages/login'));
 const Home = lazy(() => import('../pages/home'));
 const Room = lazy(() => import('../pages/room'));
 
@@ -16,6 +13,10 @@ const Router = () => {
       path: '/',
       index: true,
       element: <Home />,
+    },
+    {
+      path: 'login',
+      element: <Login />,
     },
     {
       path: 'rooms/:roomId',
