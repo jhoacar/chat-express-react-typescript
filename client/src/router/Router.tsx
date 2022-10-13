@@ -11,7 +11,6 @@ const Router = () => {
   const routes = useRoutes([
     {
       path: '/',
-      index: true,
       element: <Home />,
     },
     {

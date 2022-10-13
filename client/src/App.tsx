@@ -1,5 +1,5 @@
-import { Spinner } from 'grommet';
 import { Suspense, useState, createContext } from 'react';
+import { Spinner } from './components';
 
 // ** Router Import
 import Router from './router/Router';

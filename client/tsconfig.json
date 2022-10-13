@@ -22,7 +22,8 @@
             "@services/*": ["services/*"],
             "@components/*": ["components/*"],
             "@components": ["components"],
-            "@assets/*": ["assets/*"]
+            "@assets/*": ["assets/*"],
+            "@layouts/*": ["layouts/*"]
         }
     },
     "include": ["src", "test"],
