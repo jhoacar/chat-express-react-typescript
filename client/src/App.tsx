@@ -1,4 +1,7 @@
-import { Suspense, useState, createContext } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import AuthContext from 'contexts/auth';
+import { Suspense, useState } from 'react';
+import { getToken } from 'utils/token';
 import { Spinner } from './components';
 
 // ** Router Import
@@ -6,19 +9,17 @@ import Router from './router/Router';
 
 // ** Hooks Imports
 
-const Context = createContext<any>({});
-
 function App() {
   // eslint-disable-next-line react/jsx-no-constructed-context-values
-  const context: object = {
-    stream: useState(null),
-  };
+  const [auth, setAuth] = useState(getToken() !== null);
+  // const [theme, setTheme] = useState(getTheme() === 'dark');
+
   return (
-    <Context.Provider value={context}>
+    <AuthContext.Provider value={{ auth, setAuth }}>
       <Suspense fallback={<Spinner />}>
         <Router />
       </Suspense>
-    </Context.Provider>
+    </AuthContext.Provider>
   );
 }
 

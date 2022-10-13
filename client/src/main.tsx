@@ -24,7 +24,7 @@ root.render(
       <Suspense fallback={<Spinner />}>
         <LazyApp />
         <Toaster
-          position="top-right"
+          position="bottom-right"
           toastOptions={{ className: 'react-hot-toast' }}
         />
       </Suspense>

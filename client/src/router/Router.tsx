@@ -1,5 +1,7 @@
+import Auth from 'middlewares/auth';
 import { lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
+import { HOME, LOGIN, ROOMS } from './paths';
 
 // ** Components
 const Error = lazy(() => import('../pages/error'));
@@ -10,16 +12,20 @@ const Room = lazy(() => import('../pages/room'));
 const Router = () => {
   const routes = useRoutes([
     {
-      path: '/',
+      path: HOME,
       element: <Home />,
     },
     {
-      path: 'login',
+      path: LOGIN,
       element: <Login />,
     },
     {
-      path: 'rooms/:roomId',
-      element: <Room />,
+      path: `${ROOMS}/:roomId`,
+      element: (
+        <Auth>
+          <Room />
+        </Auth>
+      ),
     },
     {
       path: '*',

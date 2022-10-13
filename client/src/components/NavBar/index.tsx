@@ -1,12 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useEffect } from 'react';
 import {
-  Navbar,
-  MobileNav,
-  Button,
-  IconButton,
+  Navbar, MobileNav, Button, IconButton,
 } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
+import { LOGIN, REGISTER } from 'router/paths';
 
 export function NavBar() {
   const [openNav, setOpenNav] = useState(false);
@@ -21,10 +19,10 @@ export function NavBar() {
   const navList = (
     <>
       <Button variant="gradient" size="lg" className="mb-2">
-        <Link to="/login">Login</Link>
+        <Link to={LOGIN}>Login</Link>
       </Button>
       <Button variant="gradient" size="lg" className="mb-2">
-        <Link to="/register">Register</Link>
+        <Link to={REGISTER}>Register</Link>
       </Button>
     </>
   );
@@ -32,8 +30,14 @@ export function NavBar() {
   return (
     <Navbar className="max-w-none rounded-none py-8">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <h1 className="mr-4 cursor-pointer py-1.5 font-normal">
-          <Link to="/">Chat WebRTC</Link>
+        <h1 className="flex gap-4">
+          <img className="w-10 h-10" src="/icon.svg" alt="icon" />
+          <Link
+            className="mr-4 cursor-pointer py-1.5 font-normal"
+            to="/"
+          >
+            Chat WebRTC
+          </Link>
         </h1>
         <div className="hidden lg:flex gap-6">{navList}</div>
         <IconButton
@@ -78,9 +82,7 @@ export function NavBar() {
         <div className="mt-4">
           <hr />
         </div>
-        <div className="mt-8 flex flex-col gap-1">
-          {navList}
-        </div>
+        <div className="mt-8 flex flex-col gap-1">{navList}</div>
       </MobileNav>
     </Navbar>
   );

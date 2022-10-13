@@ -23,6 +23,7 @@
             "@components/*": ["components/*"],
             "@components": ["components"],
             "@assets/*": ["assets/*"],
+            "@layouts": ["layouts"],
             "@layouts/*": ["layouts/*"]
         }
     },

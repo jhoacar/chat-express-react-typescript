@@ -8,14 +8,12 @@ import styles from './index.module.scss';
 
 export function Layout({ children }: any) {
   return (
-    <div>
+    <main className={styles.main}>
       <header className={styles.header}>
         <NavBar />
       </header>
       <article className={styles.article}>
-        <div>
-          {children}
-        </div>
+        <div>{children}</div>
       </article>
       <aside className={styles.sidebar}>
         <SideBar />
@@ -23,7 +21,7 @@ export function Layout({ children }: any) {
       <footer className={styles.footer}>
         <Footer />
       </footer>
-    </div>
+    </main>
   );
 }
 
