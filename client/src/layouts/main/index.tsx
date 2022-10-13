@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { NavBar } from '@components/NavBar';
+// import { NavBar } from '@components/NavBar';
 
 import { Footer } from '@components/Footer';
 
@@ -9,15 +9,16 @@ import styles from './index.module.scss';
 export function Layout({ children }: any) {
   return (
     <main className={styles.main}>
-      <header className={styles.header}>
-        <NavBar />
-      </header>
       <article className={styles.article}>
-        <div>{children}</div>
+        <aside className={styles.aside}>
+          <SideBar />
+        </aside>
+        <section className={styles.section}>
+          <div className="flex flex-col items-center justify-center h-full p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+            {children}
+          </div>
+        </section>
       </article>
-      <aside className={styles.sidebar}>
-        <SideBar />
-      </aside>
       <footer className={styles.footer}>
         <Footer />
       </footer>
