@@ -2,9 +2,16 @@ import axios from 'axios';
 
 const SERVER = import.meta.env.VITE_SERVER || '/api/v1';
 
-export async function login(name: string, email: string, password: string) {
+type RegisterError = { error?: string };
+type RegisterComplete = { registered?: boolean };
+
+export async function register(
+  name: string,
+  email: string,
+  password: string,
+): Promise<RegisterError & RegisterComplete> {
   if (!name || !email || !password) {
-    throw new Error('Name, Email and Password are required');
+    return { error: 'Name, Email and Password are required' };
   }
 
   const response = await axios.post(`${SERVER}/users`, {
@@ -14,8 +21,8 @@ export async function login(name: string, email: string, password: string) {
   });
 
   if (!response.data.body) {
-    throw new Error('Failed the register');
+    return { error: 'Failed the register' };
   }
 
-  return true;
+  return { registered: true };
 }

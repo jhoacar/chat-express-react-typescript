@@ -1,11 +1,17 @@
 import axios from 'axios';
-import { setToken } from 'utils/token';
 
 const SERVER = import.meta.env.VITE_SERVER || '/api/v1';
 
-export async function login(email: string, password: string) {
+export type LoginError = { error?: string };
+export type LoginResult = { token?: string };
+export type LoginValidate = { authenticated?: boolean };
+
+export async function login(
+  email: string,
+  password: string,
+): Promise<LoginResult & LoginError> {
   if (!email || !password) {
-    throw new Error('Email and Password are required');
+    return { error: 'Email and Password are required' };
   }
 
   const response = await axios.post(`${SERVER}/auth/login`, {
@@ -14,17 +20,23 @@ export async function login(email: string, password: string) {
   });
 
   if (!response.data.body) {
-    throw new Error('Failed authentication');
+    return { error: 'Failed authentication' };
   }
 
-  setToken(response.data.body.token);
+  if (!response.data.body.token) {
+    return { error: 'Token is missed' };
+  }
 
-  return true;
+  return {
+    token: response.data.body.token as string,
+  };
 }
 
-export async function validateToken(token: string) {
+export async function validateToken(
+  token: string,
+): Promise<LoginValidate & LoginError> {
   if (!token) {
-    throw new Error('Token is required');
+    return { error: 'Token is required' };
   }
   const response = await axios.post(
     `${SERVER}/auth/validate`,
@@ -37,8 +49,8 @@ export async function validateToken(token: string) {
   );
 
   if (!response.data.body) {
-    throw new Error('Failed authentication');
+    return { error: 'Failed authentication' };
   }
 
-  return true;
+  return { authenticated: true };
 }

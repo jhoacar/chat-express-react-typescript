@@ -1,8 +1,8 @@
 /* eslint-disable react/jsx-no-constructed-context-values */
-import AuthContext from 'contexts/auth';
 import { Suspense, useState } from 'react';
-import { getToken } from 'utils/token';
-import { Spinner } from './components';
+import AuthContext from '@/contexts/auth';
+import { getToken } from '@/utils/token';
+import { Spinner } from '@/components';
 
 // ** Router Import
 import Router from './router/Router';

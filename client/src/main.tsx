@@ -2,14 +2,16 @@
 import { createRoot } from 'react-dom/client';
 import { Suspense, lazy } from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 // ** Toast
 import { Toaster } from 'react-hot-toast';
 // ** Tailwind
 import { ThemeProvider } from '@material-tailwind/react';
 
-import '@assets/css/index.css';
+import '@/assets/css/index.css';
 
-import Spinner from '@components/Spinner';
+import Spinner from '@/components/Spinner';
+import { store } from './redux';
 
 // ** Lazy load app
 const LazyApp = lazy(() => import('./App'));
@@ -22,7 +24,9 @@ root.render(
   <BrowserRouter>
     <ThemeProvider>
       <Suspense fallback={<Spinner />}>
-        <LazyApp />
+        <Provider store={store}>
+          <LazyApp />
+        </Provider>
         <Toaster
           position="bottom-right"
           toastOptions={{ className: 'react-hot-toast' }}

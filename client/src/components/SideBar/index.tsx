@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import {
   AdjustmentsHorizontalIcon,
   ArrowLeftCircleIcon,
@@ -7,13 +9,14 @@ import {
   ChartBarSquareIcon,
   ChatBubbleBottomCenterIcon,
   FolderIcon,
+  HomeIcon,
   MagnifyingGlassCircleIcon,
   TableCellsIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { LOGIN, REGISTER } from '@router/paths';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { HOME, LOGIN, REGISTER } from '@/router/paths';
 
 function SideBar() {
   const [open, setOpen] = useState(false);
@@ -51,6 +54,12 @@ function SideBar() {
 
   const MenusGuest = [
     {
+      title: 'Home',
+      icon: <HomeIcon className="h-6 w-6" />,
+      href: HOME,
+      gap: false,
+    },
+    {
       title: 'Login',
       icon: <ArrowRightOnRectangleIcon className="h-6 w-6" />,
       href: LOGIN,
@@ -75,20 +84,21 @@ function SideBar() {
            border-2 rounded-full  ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
       />
-      <div className="flex gap-x-4 items-center border-b border-gray-400 pb-4">
-        <img
-          src="/icon.svg"
-          className={`h-6 w-6 cursor-pointer duration-500 ${
+      <div
+        className="cursor-pointer items-center border-b border-gray-400"
+        onClick={() => setOpen(!open)}
+      >
+        <ChatBubbleBottomCenterIcon
+          className={`text-red-400 h-10 w-10 cursor-pointer duration-500 ${
             open && 'rotate-[360deg]'
           }`}
-          alt="logo"
         />
         <h1
           className={`origin-left font-medium text-xl duration-200 ${
             !open && 'scale-0'
           }`}
         >
-          Chat WebRTC
+          <Link to={HOME}>Chat WebRTC</Link>
         </h1>
       </div>
       <ul className="pt-6">

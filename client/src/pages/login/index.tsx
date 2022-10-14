@@ -1,62 +1,81 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { Layout } from '@layouts';
+import { FormEventHandler, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import toast from 'react-hot-toast';
+import { Layout } from '@/layouts';
+import { login } from '@/services/auth';
+import { login as loginAction } from '@/redux/states';
 
 function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const dispatch = useDispatch();
+
+  const handleSubmit: FormEventHandler = (event) => {
+    event.preventDefault();
+
+    login(email, password)
+      .then((result) => {
+        if (result.error) {
+          toast.error(result.error);
+        } else {
+          dispatch(loginAction(result.token));
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+        toast.error('An error has ocurred in the server');
+      });
+  };
+
   return (
     <Layout>
-      <div className="w-full max-w-xs">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-          <div className="mb-4">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="username"
-            >
-              Username
-            </label>
+      <form
+        className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+        onSubmit={handleSubmit}
+      >
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="email"
+          >
+            Email
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              id="username"
-              type="text"
-              placeholder="Username"
+              id="email"
+              type="email"
+              placeholder="Type your email"
+              required
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
             />
-          </div>
-          <div className="mb-6">
-            <label
-              className="block text-gray-700 text-sm font-bold mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
+          </label>
+        </div>
+        <div className="mb-6">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="password"
+          >
+            Password
             <input
-              className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
               id="password"
               type="password"
-              placeholder="******************"
+              placeholder="Type your password"
+              required
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
             />
-            <p className="text-red-500 text-xs italic">
-              Please choose a password.
-            </p>
-          </div>
-          <div className="flex items-center justify-between">
-            <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button"
-            >
-              Sign In
-            </button>
-            <a
-              className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="#"
-            >
-              Forgot Password?
-            </a>
-          </div>
-        </form>
-        <p className="text-center text-gray-500 text-xs">
-          &copy;2020 Acme Corp. All rights reserved.
-        </p>
-      </div>
+          </label>
+        </div>
+        <div className="flex items-center justify-between">
+          <button
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            type="button"
+          >
+            Sign In
+          </button>
+        </div>
+      </form>
     </Layout>
   );
 }

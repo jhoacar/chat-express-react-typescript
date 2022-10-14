@@ -5,7 +5,11 @@ import {
 } from '@material-tailwind/react';
 import { Link } from 'react-router-dom';
 import { LOGIN, REGISTER } from 'router/paths';
-import { Bars4Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import {
+  Bars4Icon,
+  ChatBubbleBottomCenterIcon,
+  XMarkIcon,
+} from '@heroicons/react/24/outline';
 
 export function NavBar() {
   const [openNav, setOpenNav] = useState(false);
@@ -32,7 +36,7 @@ export function NavBar() {
     <Navbar className="max-w-none shadow-none rounded-none py-4 bg-gray-400 dark:bg-gray-800">
       <div className="flex items-center justify-between text-blue-gray-900">
         <h1 className="flex gap-4">
-          <img className="w-10 h-10" src="/icon.svg" alt="icon" />
+          <ChatBubbleBottomCenterIcon className="w-10 h-10" />
           <Link
             className="mr-4 cursor-pointer py-1.5 font-normal"
             to="/"

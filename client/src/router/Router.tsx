@@ -1,7 +1,7 @@
-import Auth from 'middlewares/auth';
-import Register from 'pages/register';
 import { lazy } from 'react';
 import { useRoutes } from 'react-router-dom';
+import Auth from '@/middlewares/auth';
+import Register from '@/pages/register';
 import {
   HOME, LOGIN, REGISTER, ROOMS,
 } from './paths';

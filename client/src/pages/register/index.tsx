@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Layout } from '@layouts';
+import { Layout } from '@/layouts';
 
 function Register() {
   return (

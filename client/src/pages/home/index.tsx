@@ -1,11 +1,7 @@
-import { Layout } from '@layouts';
+import { Layout } from '@/layouts';
 
 export function Home() {
-  return (
-    <Layout>
-      You must login for create a Video Chat
-    </Layout>
-  );
+  return <Layout>You must login for create a Video Chat</Layout>;
 }
 
 export default Home;

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState, useEffect } from 'react';
-import WebSocketService from '@services/websocket';
-import PeerService from '@services/peer';
+import WebSocketService from '@/services/websocket';
+import PeerService from '@/services/peer';
 
 const websocket = new WebSocketService();
 const peerService = new PeerService();
@@ -84,9 +84,7 @@ export function Video() {
   //   initSocket();
   // }, []);
 
-  return (
-    <div>Video</div>
-  );
+  return <div>Video</div>;
 }
 
 export default Video;

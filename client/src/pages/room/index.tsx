@@ -1,11 +1,7 @@
-import { Layout } from '@layouts';
+import { Layout } from '@/layouts';
 
 function Room() {
-  return (
-    <Layout>
-      Room
-    </Layout>
-  );
+  return <Layout>Room</Layout>;
 }
 
 export default Room;
