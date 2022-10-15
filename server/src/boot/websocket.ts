@@ -1,20 +1,14 @@
 import { Server } from 'socket.io';
-import app from '@boot/app';
 import colors from 'colors/safe';
-import { createServer } from 'http';
-import { auth } from '@middlewares/auth';
-import { wrapper } from '@utils/socket';
+import { readdirSync } from 'fs';
+import { dirname as eventDirname } from '@events';
 
-const server = createServer(app);
-
-const io = new Server(server, {
+const io = new Server({
   cors: {
     origin: '*',
   },
-  path: '/api/socket',
+  path: '/api/websocket',
 });
-
-io.use(wrapper(auth));
 
 io.on('connection', (socket) => {
   const { address, issued } = socket.handshake;
@@ -23,28 +17,21 @@ io.on('connection', (socket) => {
     colors.green(`New connection from ${address} - ${new Date(issued)}`),
   );
 
-  socket.on('ping', (data: any) => {
-    console.log(
-      `User (${address} - ${new Date(issued)}) sent a ping: \n`,
-      data,
-    );
-    socket.emit('pong', { message: 'Hello from server' });
-  });
-
-  socket.on('join', (data: any) => {
-    console.log(
-      `User (${address} - ${new Date(issued)}) connected send: \n`,
-      data,
-    );
-
-    const { roomName } = data;
-    socket.join(roomName);
-    socket.broadcast.emit('new-user', data);
-
-    socket.on('disconnect', () => {
-      socket.broadcast.emit('bye-user', data);
-    });
-  });
+  /**
+     * We use a dynamic import for all
+     * subfolders in events folder
+     */
+  readdirSync(`${eventDirname}`, { withFileTypes: true })
+    .filter((file) => file.isDirectory())
+    .map((file) => import(`${eventDirname}/${file.name}`)
+      .then((module: any) => {
+        socket.on(`${file.name}`, module.default);
+      })
+      .catch((error: Error) => {
+        throw new Error(
+          `An error has ocurred importing ${file.name}: ${error.message}`,
+        );
+      }));
 });
 
-export default server;
+export default io;

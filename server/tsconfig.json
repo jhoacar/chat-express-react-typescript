@@ -22,7 +22,9 @@
             "@boot": ["boot"],
             "@boot/*": ["boot/*"],
             "@utils/*": ["utils/*"],
-            "@config/*": ["config/*"]
+            "@config/*": ["config/*"],
+            "@events": ["events"],
+            "@events/*": ["events/*"]
         }
     },
     "include": ["src"]
