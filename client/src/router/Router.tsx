@@ -8,7 +8,7 @@ import {
 
 // ** Components
 const Error = lazy(() => import('../pages/error'));
-const Login = lazy(() => import('../pages/login'));
+const Login = lazy(() => import('../pages/login/Login'));
 const Home = lazy(() => import('../pages/home'));
 const Room = lazy(() => import('../pages/room'));
 
