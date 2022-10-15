@@ -1,14 +1,13 @@
-// import Peer from 'peerjs';
+import Peer from 'peerjs';
 
-// const host: string = import.meta.env.VITE_PEER_HOST || 'localhost';
-// const port: number = parseInt(import.meta.env.VITE_PEER_PORT || '9000');
+const host: string = import.meta.env.VITE_PEER_HOST || window.location.hostname;
+const port: number = import.meta.env.VITE_PEER_PORT || window.location.port;
 
-export default class PeerService {
-  // peer: Peer;
-  // constructor() {
-  //   this.peer = new Peer({
-  //     host,
-  //     port,
-  //   });
-  // }
-}
+const peer = new Peer({
+  host,
+  port,
+  debug: 1,
+  path: '/api/v1/peer',
+});
+
+export default peer;

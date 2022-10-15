@@ -13,12 +13,17 @@ import {
   TableCellsIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid';
+import {
+  ChatBubbleBottomCenterIcon,
+  LinkIcon,
+  GlobeAltIcon,
+} from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { HOME, LOGIN, REGISTER } from '@/router/paths';
 import socket from '@/services/websocket';
+import peer from '@/services/peer';
 import {
   getConnection,
   removeConnection,
@@ -27,18 +32,25 @@ import {
 
 function SideBar() {
   const [open, setOpen] = useState(false);
-  const [connected, setConnected] = useState(getConnection());
+  const [webSocketConnected, setWebSocketConnected] = useState(
+    getConnection(),
+  );
+  const [peerSocketConnected, setPeerSocketConnected] = useState(false);
 
   useEffect(() => {
     socket.on('connect', () => {
       toast.success('Server Connected');
       setConnection();
-      setConnected(true);
+      setWebSocketConnected(true);
     });
     socket.on('disconnect', () => {
       toast.error('Server Disconnected');
       removeConnection();
-      setConnected(false);
+      setWebSocketConnected(false);
+    });
+    peer.on('open', (id) => {
+      toast.success(`Peer Connected - ${id}`);
+      setPeerSocketConnected(true);
     });
   }, []);
 
@@ -93,6 +105,34 @@ function SideBar() {
       href: REGISTER,
       gap: false,
     },
+    {
+      title: 'WebSocket',
+      icon: (
+        <GlobeAltIcon
+          title={webSocketConnected ? 'Connected' : 'Disconnected'}
+          className={
+                        `h-6 w-6 ${
+                          webSocketConnected ? 'text-blue-600' : 'text-red-600'}`
+                    }
+        />
+      ),
+      href: '#',
+      gap: false,
+    },
+    {
+      title: 'PeerSocket',
+      icon: (
+        <LinkIcon
+          title={peerSocketConnected ? 'Connected' : 'Disconnected'}
+          className={
+                        `h-6 w-6 ${
+                          peerSocketConnected ? 'text-blue-600' : 'text-red-600'}`
+                    }
+        />
+      ),
+      href: '#',
+      gap: false,
+    },
   ];
 
   return (
@@ -112,7 +152,8 @@ function SideBar() {
       >
         <ChatBubbleBottomCenterIcon
           className={`${
-            (connected && 'text-blue-600') || 'text-red-600'
+            (webSocketConnected && 'text-blue-600')
+                        || 'text-red-600'
           } text-sky-400 h-10 w-10 cursor-pointer duration-500 ${
             open && 'rotate-[360deg]'
           }`}
@@ -125,7 +166,7 @@ function SideBar() {
           <Link to={HOME}>Chat WebRTC</Link>
         </h1>
       </div>
-      <ul className="pt-6">
+      <ul className="flex flex-col pt-6">
         {MenusGuest.map((Menu, index) => (
           <li
             key={index}
