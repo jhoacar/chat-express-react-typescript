@@ -7,19 +7,41 @@ import {
   CalendarDaysIcon,
   ChartBarIcon,
   ChartBarSquareIcon,
-  ChatBubbleBottomCenterIcon,
   FolderIcon,
   HomeIcon,
   MagnifyingGlassCircleIcon,
   TableCellsIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
-import { useState } from 'react';
+import { ChatBubbleBottomCenterIcon } from '@heroicons/react/24/solid';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 import { HOME, LOGIN, REGISTER } from '@/router/paths';
+import socket from '@/services/websocket';
+import {
+  getConnection,
+  removeConnection,
+  setConnection,
+} from '@/utils/connection';
 
 function SideBar() {
   const [open, setOpen] = useState(false);
+  const [connected, setConnected] = useState(getConnection());
+
+  useEffect(() => {
+    socket.on('connect', () => {
+      toast.success('Server Connected');
+      setConnection();
+      setConnected(true);
+    });
+    socket.on('disconnect', () => {
+      toast.error('Server Disconnected');
+      removeConnection();
+      setConnected(false);
+    });
+  }, []);
+
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const MenusAuth = [
     { title: 'Dashboard', icon: <ChartBarIcon className="h-6 w-6" /> },
@@ -89,7 +111,9 @@ function SideBar() {
         onClick={() => setOpen(!open)}
       >
         <ChatBubbleBottomCenterIcon
-          className={`text-red-400 h-10 w-10 cursor-pointer duration-500 ${
+          className={`${
+            (connected && 'text-blue-600') || 'text-red-600'
+          } text-sky-400 h-10 w-10 cursor-pointer duration-500 ${
             open && 'rotate-[360deg]'
           }`}
         />
