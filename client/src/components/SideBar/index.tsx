@@ -17,6 +17,7 @@ import {
   ChatBubbleBottomCenterIcon,
   LinkIcon,
   GlobeAltIcon,
+  ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/solid';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -25,33 +26,62 @@ import { HOME, LOGIN, REGISTER } from '@/router/paths';
 import socket from '@/services/websocket';
 import peer from '@/services/peer';
 import {
-  getConnection,
-  removeConnection,
-  setConnection,
+  getWebSocketConnection,
+  removeWebSocketConnection,
+  setWebSocketConnection,
+  getPeerConnection,
+  setPeerConnection,
+  removePeerConnection,
 } from '@/utils/connection';
 
 function SideBar() {
   const [open, setOpen] = useState(false);
   const [webSocketConnected, setWebSocketConnected] = useState(
-    getConnection(),
+    getWebSocketConnection(),
   );
-  const [peerSocketConnected, setPeerSocketConnected] = useState(false);
+  const [peerID, setPeerID] = useState(getPeerConnection());
+  const [members, setMembers] = useState<string[]>([]);
 
   useEffect(() => {
     socket.on('connect', () => {
       toast.success('Server Connected');
-      setConnection();
+      setWebSocketConnection();
       setWebSocketConnected(true);
     });
     socket.on('disconnect', () => {
       toast.error('Server Disconnected');
-      removeConnection();
+      removeWebSocketConnection();
       setWebSocketConnected(false);
+    });
+    socket.on('connect-user', ({ id }) => {
+      setMembers(() => [...members, id]);
+    });
+    socket.on('disconnect-user', ({ id }) => {
+      setMembers(() => members.filter((member) => member !== id));
     });
     peer.on('open', (id) => {
       toast.success(`Peer Connected - ${id}`);
-      setPeerSocketConnected(true);
+      socket.emit('connect-user', { id });
+      setPeerConnection(id);
+      setPeerID(id);
     });
+    peer.on('close', () => {
+      toast.error('Peer disconnected');
+      socket.emit('disconnect-user', { peerID });
+      removePeerConnection();
+      setPeerID('');
+    });
+    peer.on('error', (error) => {
+      toast.error(error.message);
+      socket.emit('disconnect-user', { peerID });
+      removePeerConnection();
+      setPeerID('');
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+    };
   }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -110,10 +140,9 @@ function SideBar() {
       icon: (
         <GlobeAltIcon
           title={webSocketConnected ? 'Connected' : 'Disconnected'}
-          className={
-                        `h-6 w-6 ${
-                          webSocketConnected ? 'text-blue-600' : 'text-red-600'}`
-                    }
+          className={`h-6 w-6 ${
+            webSocketConnected ? 'text-blue-600' : 'text-red-600'
+          }`}
         />
       ),
       href: '#',
@@ -123,11 +152,10 @@ function SideBar() {
       title: 'PeerSocket',
       icon: (
         <LinkIcon
-          title={peerSocketConnected ? 'Connected' : 'Disconnected'}
-          className={
-                        `h-6 w-6 ${
-                          peerSocketConnected ? 'text-blue-600' : 'text-red-600'}`
-                    }
+          title={peerID || 'Disconnected'}
+          className={`h-6 w-6 ${
+            peerID ? 'text-blue-600' : 'text-red-600'
+          }`}
         />
       ),
       href: '#',
@@ -203,6 +231,19 @@ function SideBar() {
               </span>
             </div>
             )}
+          </li>
+        ))}
+        {members?.map((member) => (
+          <li
+            key={member}
+            className="border rounded border-gray-400 mb-1 mt-2"
+          >
+            <div className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-sm items-center gap-x-4">
+              <ChatBubbleBottomCenterTextIcon
+                title={member}
+                className="h-6 w-6 text-blue-600"
+              />
+            </div>
           </li>
         ))}
       </ul>

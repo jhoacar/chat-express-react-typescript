@@ -2,8 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+    font-family: mainFont;
+    src: url('/fonts/Virgil.woff2');
+}
+
 body,
 body > * {
     height: 100vh;
     margin: 0;
+    font-family: mainFont;
+    font-size: 1;
 }
