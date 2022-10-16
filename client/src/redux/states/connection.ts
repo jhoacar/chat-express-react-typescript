@@ -37,6 +37,7 @@ export const connectionSlice = createSlice({
     },
     disconnectWebSocket: (state) => {
       removeWebSocketID();
+      removePeerID();
       state.socketID = '';
       return state;
     },
