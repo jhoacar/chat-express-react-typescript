@@ -25,7 +25,8 @@ import { HOME, LOGIN, REGISTER } from '@/router/paths';
 import useConnection from '@/hooks/useConection';
 
 function SideBar() {
-  const { webSocketConnected, peerID, members } = useConnection();
+  const { socketID, peerID } = useConnection();
+
   const [open, setOpen] = useState(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -80,12 +81,13 @@ function SideBar() {
       gap: false,
     },
     {
-      title: 'WebSocket',
+      title: 'Socket',
+      help: socketID,
       icon: (
         <GlobeAltIcon
-          title={webSocketConnected ? 'Connected' : 'Disconnected'}
+          title={socketID ? 'Connected' : 'Disconnected'}
           className={`h-6 w-6 ${
-            webSocketConnected ? 'text-blue-600' : 'text-red-600'
+            socketID ? 'text-blue-600' : 'text-red-600'
           }`}
         />
       ),
@@ -93,7 +95,8 @@ function SideBar() {
       gap: false,
     },
     {
-      title: `PeerID - ${{ peerID }}`,
+      title: 'Peer',
+      help: peerID,
       icon: (
         <LinkIcon
           title={peerID}
@@ -124,8 +127,7 @@ function SideBar() {
       >
         <ChatBubbleBottomCenterIcon
           className={`${
-            (webSocketConnected && 'text-blue-600')
-                        || 'text-red-600'
+            (socketID && 'text-blue-600') || 'text-red-600'
           } text-sky-400 h-10 w-10 cursor-pointer duration-500 ${
             open && 'rotate-[360deg]'
           }`}
@@ -154,6 +156,7 @@ function SideBar() {
             >
               {Menu.icon}
               <span
+                title={Menu.help}
                 className={`${
                   !open && 'hidden'
                 } origin-left duration-200`}
@@ -167,6 +170,7 @@ function SideBar() {
             <div className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-sm items-center gap-x-4">
               {Menu.icon}
               <span
+                title={Menu.help}
                 className={`${
                   !open && 'hidden'
                 } origin-left duration-200`}
@@ -175,13 +179,6 @@ function SideBar() {
               </span>
             </div>
             )}
-          </li>
-        ))}
-      </ul>
-      <ul className="flex flex-col pt-6">
-        {members?.map((member: string) => (
-          <li key={member}>
-            <span>{member}</span>
           </li>
         ))}
       </ul>

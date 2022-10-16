@@ -15,9 +15,7 @@ import { AppStore } from '@/redux/store';
 
 export default function useConection() {
   const dispatch = useDispatch();
-  const webSocketConnected = useSelector(
-    (state: AppStore) => !!state.connection.socketID?.length,
-  );
+  const socketID = useSelector((state: AppStore) => state.connection.socketID);
   const peerID = useSelector((state: AppStore) => state.connection.peerID);
   const members = useSelector((state: AppStore) => state.connection.members);
 
@@ -27,7 +25,6 @@ export default function useConection() {
     } else {
       toast.error('Peer disconnected');
     }
-    socket.emit('disconnect');
     dispatch(disconnectPeer());
   };
 
@@ -79,5 +76,5 @@ export default function useConection() {
     };
   }, []);
 
-  return { webSocketConnected, peerID, members };
+  return { socketID, peerID, members };
 }
