@@ -1,19 +1,19 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import {
-  getWebSocketConnection,
-  removeWebSocketConnection,
-  setWebSocketConnection,
-  getPeerConnection,
-  setPeerConnection,
-  removePeerConnection,
+  getPeerID,
+  getWebSocketID,
+  removePeerID,
+  removeWebSocketID,
+  setPeerID,
+  setWebSocketID,
 } from '@/utils/connection';
 
 import { Connection } from '@/models/connection';
 
 export const connectionInitialState: Connection = {
-  websocket: getWebSocketConnection(),
-  peerID: getPeerConnection(),
+  socketID: getWebSocketID(),
+  peerID: getPeerID(),
 };
 
 export const connectionSlice = createSlice({
@@ -21,35 +21,27 @@ export const connectionSlice = createSlice({
   initialState: connectionInitialState,
   reducers: {
     connectPeer: (state, action) => {
-      setPeerConnection(action.payload);
+      setPeerID(action.payload);
       state.peerID = action.payload;
       return state;
     },
     disconnectPeer: (state) => {
-      removePeerConnection();
+      removePeerID();
       state.peerID = '';
       return state;
     },
-    connectWebSocket: (state) => {
-      setWebSocketConnection();
-      state.websocket = true;
+    connectWebSocket: (state, action) => {
+      setWebSocketID(action.payload);
+      state.socketID = action.payload;
       return state;
     },
     disconnectWebSocket: (state) => {
-      removeWebSocketConnection();
-      state.websocket = false;
+      removeWebSocketID();
+      state.socketID = '';
       return state;
     },
-    addNewMember: (state, action) => {
-      state.members?.push(action.payload);
-      console.log('New user: ', action.payload);
-      return state;
-    },
-    changeMembers: (state, action) => {
-      state.members = action.payload?.map(
-        (id: string) => id !== state.peerID,
-      );
-      console.log('Members: ', action.payload);
+    updateMembers: (state, action) => {
+      state.members = action.payload;
       return state;
     },
   },
@@ -60,6 +52,5 @@ export const {
   disconnectPeer,
   connectWebSocket,
   disconnectWebSocket,
-  addNewMember,
-  changeMembers,
+  updateMembers,
 } = connectionSlice.actions;

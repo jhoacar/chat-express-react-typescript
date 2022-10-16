@@ -2,7 +2,7 @@ import { Server } from 'socket.io';
 import colors from 'colors/safe';
 import { readdirSync } from 'fs';
 import { dirname as eventDirname } from '@events';
-import SQLite from '@models/sql/sessions';
+import SQLite from '@models/sql/peer';
 
 const io = new Server({
   cors: {
@@ -17,10 +17,14 @@ io.on('connection', async (socket) => {
   /**
      * We save the new user connected
      */
-  await SQLite.create({
-    peerID: '',
-    socketID: socket.id,
-  });
+  try {
+    await SQLite.create({
+      peerID: '',
+      socketID: socket.id,
+    });
+  } catch (error: any) {
+    console.log(error.message);
+  }
 
   console.log(
     colors.green(

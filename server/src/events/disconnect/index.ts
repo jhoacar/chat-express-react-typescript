@@ -1,10 +1,6 @@
 import colors from 'colors/safe';
-import SQLite from '@models/sql/sessions';
 import { Socket } from 'socket.io';
-
-/**
- * We remove from SQLite the user disconnected
- */
+import PeerUser from '@models/sql/peer';
 
 export default async function disconnect(this: Socket) {
   const { address, issued } = this.handshake;
@@ -16,22 +12,18 @@ export default async function disconnect(this: Socket) {
       )}`,
     ),
   );
+  const { id: socketID } = this;
 
   let users: any[] = [];
-
   try {
-    await SQLite.destroy({
-      where: {
-        socketID: this.id,
-      },
-    });
+    await PeerUser.destroy({ where: { socketID } });
 
-    users = await SQLite.findAll({
+    users = await PeerUser.findAll({
       raw: true,
     });
   } catch (error: any) {
     console.log(error.message);
   } finally {
-    this.broadcast.emit('peer-users', users);
+    this.broadcast.emit('update', users);
   }
 }

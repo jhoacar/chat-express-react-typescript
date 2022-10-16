@@ -10,6 +10,7 @@ const server = createServer(app);
 const peer = ExpressPeerServer(server, {
   proxied: true,
   path: `/api/v${getVersion({ minimal: true })}/peer`,
+  allow_discovery: true,
 });
 
 websocket.attach(server);

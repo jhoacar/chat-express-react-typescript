@@ -1,5 +1,5 @@
 export interface Connection {
-  websocket?: boolean
-  peerID?: String
-  members?: String[]
+  socketID?: string
+  peerID?: string
+  members?: string[]
 }

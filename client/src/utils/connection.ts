@@ -1,23 +1,23 @@
-export function getWebSocketConnection(): boolean {
-  return localStorage.getItem('websocket') === 'true';
+export function getWebSocketID(): string {
+  return localStorage.getItem('websocket') || '';
 }
 
-export function setWebSocketConnection(): void {
-  localStorage.setItem('websocket', 'true');
+export function setWebSocketID(id: string): void {
+  localStorage.setItem('websocket', id);
 }
 
-export function removeWebSocketConnection(): void {
+export function removeWebSocketID(): void {
   localStorage.removeItem('websocket');
 }
 
-export function getPeerConnection(): string {
+export function getPeerID(): string {
   return localStorage.getItem('peer') || '';
 }
 
-export function setPeerConnection(id: string): void {
+export function setPeerID(id: string): void {
   localStorage.setItem('peer', id);
 }
 
-export function removePeerConnection(): void {
+export function removePeerID(): void {
   localStorage.removeItem('peer');
 }

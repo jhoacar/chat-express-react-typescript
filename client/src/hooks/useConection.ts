@@ -6,56 +6,72 @@ import {
   disconnectWebSocket,
   connectPeer,
   disconnectPeer,
-  addNewMember,
-  changeMembers,
+  updateMembers,
 } from '@/redux';
 
 import socket from '@/services/websocket';
 import peer from '@/services/peer';
+import { AppStore } from '@/redux/store';
 
 export default function useConection() {
   const dispatch = useDispatch();
   const webSocketConnected = useSelector(
-    (state: any) => state.connection.websocket,
+    (state: AppStore) => !!state.connection.socketID?.length,
   );
-  const peerID = useSelector((state: any) => state.connection.peerID);
-  const members = useSelector((state: any) => state.connection.members);
+  const peerID = useSelector((state: AppStore) => state.connection.peerID);
+  const members = useSelector((state: AppStore) => state.connection.members);
+
+  const handlePeerDisconected = (error: any) => {
+    if (error?.message) {
+      toast.error(error.message);
+    } else {
+      toast.error('Peer disconnected');
+    }
+    socket.emit('disconnect');
+    dispatch(disconnectPeer());
+  };
+
+  const handlePeerConnected = (newPeerID: string) => {
+    toast.success(`Peer Connected - ${newPeerID}`);
+
+    socket.emit('update', {
+      socketID: socket.id,
+      peerID: newPeerID,
+    });
+
+    dispatch(connectPeer(newPeerID));
+  };
+
+  const handleWebSocketConnected = () => {
+    toast.success('Server Connected');
+    dispatch(connectWebSocket(socket.id));
+  };
+  const handleWebSocketDisconnected = () => {
+    toast.error('Server Disconnected');
+    dispatch(disconnectWebSocket());
+  };
+
+  const handleUpdateMembers = (data: any) => {
+    let newMembers = [];
+    if (Array.isArray(data)) {
+      newMembers = data
+        .filter((member) => member?.socketID !== socket.id)
+        .map((member) => member.peerID)
+        .filter((member) => member);
+    }
+    dispatch(updateMembers(newMembers));
+  };
 
   useEffect(() => {
-    socket.on('connect', () => {
-      toast.success('Server Connected');
-      dispatch(connectWebSocket());
-    });
-    socket.on('disconnect', () => {
-      toast.error('Server Disconnected');
-      dispatch(disconnectWebSocket());
-    });
-    socket.on('peer-users', (users: any[]) => {
-      const newMembers = users
-        .map((user) => user.peerID)
-        .filter((member) => member !== peerID);
-      dispatch(changeMembers(newMembers));
-    });
+    socket.on('connect', handleWebSocketConnected);
+    socket.on('disconnect', handleWebSocketDisconnected);
 
-    socket.on('new-user', (id: string) => {
-      dispatch(addNewMember(id));
-    });
+    socket.on('update', handleUpdateMembers);
 
-    peer.on('open', (id) => {
-      toast.success(`Peer Connected - ${id}`);
-      socket.emit('load-user', { id });
-      dispatch(connectPeer(id));
-    });
-    peer.on('close', () => {
-      toast.error('Peer disconnected');
-      socket.emit('disconnect');
-      dispatch(disconnectPeer());
-    });
-    peer.on('error', (error) => {
-      toast.error(error.message);
-      socket.emit('disconnect');
-      dispatch(disconnectPeer());
-    });
+    peer.on('open', handlePeerConnected);
+
+    peer.on('close', () => handlePeerDisconected(null));
+    peer.on('error', handlePeerDisconected);
 
     return () => {
       socket.off('connect');

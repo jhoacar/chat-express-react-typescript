@@ -17,7 +17,7 @@ import {
   ChatBubbleBottomCenterIcon,
   LinkIcon,
   GlobeAltIcon,
-  ChatBubbleBottomCenterTextIcon,
+  // ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/solid';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -93,10 +93,10 @@ function SideBar() {
       gap: false,
     },
     {
-      title: 'PeerSocket',
+      title: `PeerID - ${{ peerID }}`,
       icon: (
         <LinkIcon
-          title={peerID || 'Disconnected'}
+          title={peerID}
           className={`h-6 w-6 ${
             peerID ? 'text-blue-600' : 'text-red-600'
           }`}
@@ -139,9 +139,9 @@ function SideBar() {
         </h1>
       </div>
       <ul className="flex flex-col pt-6">
-        {MenusGuest.map((Menu, index) => (
+        {MenusGuest?.map((Menu, index) => (
           <li
-            key={index}
+            key={Menu.title}
             className={`border rounded border-gray-400 mb-1
               ${Menu.gap ? 'mt-9' : 'mt-2'} ${
               index === 0 && 'bg-light-white'
@@ -177,24 +177,11 @@ function SideBar() {
             )}
           </li>
         ))}
-        {members?.map((member) => (
-          <li
-            key={member}
-            className="border rounded border-gray-400 mb-1 mt-2"
-          >
-            <div className="flex rounded-md p-2 cursor-pointer hover:bg-light-white text-sm items-center gap-x-4">
-              <ChatBubbleBottomCenterTextIcon
-                title={member}
-                className="h-6 w-6 text-blue-600"
-              />
-              <span
-                className={`${
-                  !open && 'hidden'
-                } origin-left duration-200`}
-              >
-                {member}
-              </span>
-            </div>
+      </ul>
+      <ul className="flex flex-col pt-6">
+        {members?.map((member: string) => (
+          <li key={member}>
+            <span>{member}</span>
           </li>
         ))}
       </ul>

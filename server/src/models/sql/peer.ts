@@ -10,17 +10,17 @@ const schema = {
   },
 };
 
-const Session = sqlite.define('session', schema, {
-  tableName: 'sessions',
+const PeerUser = sqlite.define('PeerUser', schema, {
+  tableName: 'PeerUsers',
 });
 (async () => {
   console.log('Dropping table');
   try {
-    await Session.drop();
-    await Session.sync();
+    await PeerUser.drop();
+    await PeerUser.sync();
   } catch (error: any) {
     console.log(error.message);
   }
 })();
 
-export default Session;
+export default PeerUser;
