@@ -2,7 +2,11 @@ function Footer() {
   return (
     <div className="h-full p-4 rounded-none shadow md:flex md:items-center md:justify-between md:p-6 bg-gray-100 dark:bg-gray-800 text-gray-600">
       <span className="text-sm sm:text-center">
-        © 2022 Chat WebRTC.
+        ©
+        {' '}
+        {new Date().getFullYear()}
+        {' '}
+        Chat WebRTC.
         {' '}
         <a
           href="https://github.com/jhoacar"

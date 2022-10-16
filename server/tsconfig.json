@@ -24,7 +24,9 @@
             "@utils/*": ["utils/*"],
             "@config/*": ["config/*"],
             "@events": ["events"],
-            "@events/*": ["events/*"]
+            "@events/*": ["events/*"],
+            "@customTypes": ["types"],
+            "@customTypes/*": ["types/*"]
         }
     },
     "include": ["src"]

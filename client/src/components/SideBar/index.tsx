@@ -53,27 +53,34 @@ function SideBar() {
       removeWebSocketConnection();
       setWebSocketConnected(false);
     });
-    socket.on('connect-user', ({ id }) => {
+    socket.on('peer-users', (users: any[]) => {
+      const newMembers = users
+        .map((user) => user.peerID)
+        .filter((member) => member !== peerID);
+
+      console.log(newMembers);
+      setMembers(() => newMembers);
+    });
+
+    socket.on('new-user', (id: string) => {
       setMembers(() => [...members, id]);
     });
-    socket.on('disconnect-user', ({ id }) => {
-      setMembers(() => members.filter((member) => member !== id));
-    });
+
     peer.on('open', (id) => {
       toast.success(`Peer Connected - ${id}`);
-      socket.emit('connect-user', { id });
+      socket.emit('load-user', { id });
       setPeerConnection(id);
       setPeerID(id);
     });
     peer.on('close', () => {
       toast.error('Peer disconnected');
-      socket.emit('disconnect-user', { peerID });
+      socket.emit('disconnect');
       removePeerConnection();
       setPeerID('');
     });
     peer.on('error', (error) => {
       toast.error(error.message);
-      socket.emit('disconnect-user', { peerID });
+      socket.emit('disconnect');
       removePeerConnection();
       setPeerID('');
     });
@@ -243,6 +250,13 @@ function SideBar() {
                 title={member}
                 className="h-6 w-6 text-blue-600"
               />
+              <span
+                className={`${
+                  !open && 'hidden'
+                } origin-left duration-200`}
+              >
+                {member}
+              </span>
             </div>
           </li>
         ))}
