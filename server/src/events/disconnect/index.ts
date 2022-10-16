@@ -17,15 +17,21 @@ export default async function disconnect(this: Socket) {
     ),
   );
 
-  await SQLite.destroy({
-    where: {
-      socketID: this.id,
-    },
-  });
+  let users: any[] = [];
 
-  const users = await SQLite.findAll({
-    raw: true,
-  });
+  try {
+    await SQLite.destroy({
+      where: {
+        socketID: this.id,
+      },
+    });
 
-  this.broadcast.emit('peer-users', users);
+    users = await SQLite.findAll({
+      raw: true,
+    });
+  } catch (error: any) {
+    console.log(error.message);
+  } finally {
+    this.broadcast.emit('peer-users', users);
+  }
 }

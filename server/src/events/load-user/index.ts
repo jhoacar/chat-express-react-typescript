@@ -9,24 +9,31 @@ export default async function loadUser(this: Socket, data: any) {
 
   console.log(color.blue(`Adding new peer user - ${id}`));
 
-  await SQLite.update(
-    { peerID: id },
-    {
+  let users: any[] = [];
+
+  try {
+    await SQLite.update(
+      { peerID: id },
+      {
+        where: {
+          socketID,
+        },
+      },
+    );
+
+    this.broadcast.emit('new-user', id);
+
+    users = await SQLite.findAll({
+      raw: true,
       where: {
-        socketID,
+        socketID: {
+          [Op.not]: socketID,
+        },
       },
-    },
-  );
-
-  const users = await SQLite.findAll({
-    raw: true,
-    where: {
-      socketID: {
-        [Op.not]: socketID,
-      },
-    },
-  });
-
-  this.emit('peer-users', users);
-  this.broadcast.emit('new-user', id);
+    });
+  } catch (error: any) {
+    console.log(error.message);
+  } finally {
+    this.emit('peer-users', users);
+  }
 }

@@ -19,77 +19,14 @@ import {
   GlobeAltIcon,
   ChatBubbleBottomCenterTextIcon,
 } from '@heroicons/react/24/solid';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import toast from 'react-hot-toast';
 import { HOME, LOGIN, REGISTER } from '@/router/paths';
-import socket from '@/services/websocket';
-import peer from '@/services/peer';
-import {
-  getWebSocketConnection,
-  removeWebSocketConnection,
-  setWebSocketConnection,
-  getPeerConnection,
-  setPeerConnection,
-  removePeerConnection,
-} from '@/utils/connection';
+import useConnection from '@/hooks/useConection';
 
 function SideBar() {
+  const { webSocketConnected, peerID, members } = useConnection();
   const [open, setOpen] = useState(false);
-  const [webSocketConnected, setWebSocketConnected] = useState(
-    getWebSocketConnection(),
-  );
-  const [peerID, setPeerID] = useState(getPeerConnection());
-  const [members, setMembers] = useState<string[]>([]);
-
-  useEffect(() => {
-    socket.on('connect', () => {
-      toast.success('Server Connected');
-      setWebSocketConnection();
-      setWebSocketConnected(true);
-    });
-    socket.on('disconnect', () => {
-      toast.error('Server Disconnected');
-      removeWebSocketConnection();
-      setWebSocketConnected(false);
-    });
-    socket.on('peer-users', (users: any[]) => {
-      const newMembers = users
-        .map((user) => user.peerID)
-        .filter((member) => member !== peerID);
-
-      console.log(newMembers);
-      setMembers(() => newMembers);
-    });
-
-    socket.on('new-user', (id: string) => {
-      setMembers(() => [...members, id]);
-    });
-
-    peer.on('open', (id) => {
-      toast.success(`Peer Connected - ${id}`);
-      socket.emit('load-user', { id });
-      setPeerConnection(id);
-      setPeerID(id);
-    });
-    peer.on('close', () => {
-      toast.error('Peer disconnected');
-      socket.emit('disconnect');
-      removePeerConnection();
-      setPeerID('');
-    });
-    peer.on('error', (error) => {
-      toast.error(error.message);
-      socket.emit('disconnect');
-      removePeerConnection();
-      setPeerID('');
-    });
-
-    return () => {
-      socket.off('connect');
-      socket.off('disconnect');
-    };
-  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const MenusAuth = [

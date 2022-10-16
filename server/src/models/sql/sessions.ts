@@ -15,8 +15,12 @@ const Session = sqlite.define('session', schema, {
 });
 (async () => {
   console.log('Dropping table');
-  await Session.drop();
-  await Session.sync();
+  try {
+    await Session.drop();
+    await Session.sync();
+  } catch (error: any) {
+    console.log(error.message);
+  }
 })();
 
 export default Session;
