@@ -12,7 +12,9 @@ export function Layout({ children }: any) {
       <article
         className={`
             w-full h-full
+            mb-4
             lg:flex
+            lg:m-0
             `}
       >
         <aside
@@ -46,7 +48,7 @@ export function Layout({ children }: any) {
           </div>
         </section>
       </article>
-      <footer className="w-full h-1/6 mt-auto">
+      <footer className="w-full h-20 mt-auto">
         <Footer />
       </footer>
     </main>

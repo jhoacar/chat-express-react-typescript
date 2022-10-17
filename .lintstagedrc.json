@@ -1,4 +1,4 @@
 {
-    "*": "prettier --write",
+    "!*.{ts,tsx}": "prettier --write",
     "*.{ts,tsx}" : "npx eslint --fix"
 }
