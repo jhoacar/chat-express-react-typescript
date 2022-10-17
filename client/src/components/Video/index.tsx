@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 function Video() {
   return <div>Video</div>;
 }

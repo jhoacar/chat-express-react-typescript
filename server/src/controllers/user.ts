@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { User as UserModel } from '@models';
 import { User } from '@models/schemas';
 import { encryptPassword } from '@utils/bcrypt';

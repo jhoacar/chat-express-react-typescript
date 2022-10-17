@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { User } from '@models';
 import { UserSchema } from '@models/schemas';
 import { NextFunction, Request, Response } from 'express';

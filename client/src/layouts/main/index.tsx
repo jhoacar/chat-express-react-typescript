@@ -1,8 +1,4 @@
-import { ReactNode } from 'react';
-// import { NavBar } from '@components/NavBar';
-
-import { Footer } from '@/components/Footer';
-
+import Footer from '@/components/Footer';
 import Bar from '@/components/Bar';
 
 export function Layout({ children }: any) {
@@ -56,13 +52,5 @@ export function Layout({ children }: any) {
     </main>
   );
 }
-
-export interface LayoutProps {
-  children?: ReactNode // best, accepts everything React can render
-}
-
-Layout.defaultProps = {
-  children: null,
-};
 
 export default Layout;

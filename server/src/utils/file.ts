@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { readdirSync, existsSync } from 'fs';
 
 /**
@@ -11,7 +12,6 @@ export function getAllFiles(src: string): string[] {
 
   let files: string[] = [];
 
-  // eslint-disable-next-line no-restricted-syntax
   for (const file of readdirSync(src, { withFileTypes: true })) {
     if (file.isDirectory()) {
       files = [...getAllFiles(`${src}/${file.name}`), ...files];

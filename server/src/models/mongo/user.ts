@@ -1,4 +1,6 @@
 /* eslint-disable class-methods-use-this */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable new-cap */
 import { User as UserBase, UserQuery, UserSchema } from '@models/schemas';
 import { model, Schema } from 'mongoose';
 
@@ -13,12 +15,10 @@ UserBase.driver = model('User', UserBase.schema);
 export default class User extends UserBase {
   async save() {
     const data: any = { ...this.user };
-    // eslint-disable-next-line new-cap
     await new UserBase.driver(data).save();
     return this.user;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   async find(query: UserQuery) {
     const user: UserSchema = {
       id: 1,

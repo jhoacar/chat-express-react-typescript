@@ -10,10 +10,7 @@ import Router from './router/Router';
 // ** Hooks Imports
 
 function App() {
-  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const [auth, setAuth] = useState(getToken() !== null);
-  // const [theme, setTheme] = useState(getTheme() === 'dark');
-
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       <Suspense fallback={<Spinner />}>

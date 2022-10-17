@@ -7,7 +7,6 @@ import { getAllFiles } from '@utils/file';
 
 import { getPackage } from '@utils/package';
 
-// eslint-disable-next-line import/no-dynamic-require
 const packageJSON = getPackage();
 
 const router = Router();

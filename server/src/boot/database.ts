@@ -1,14 +1,15 @@
+/* eslint-disable import/no-dynamic-require */
+/* eslint-disable global-require */
 import { driver, SQL, MONGO } from '@config/database';
 
-// eslint-disable-next-line no-var
-var module: string = '';
+let library: string = '';
 
 switch (driver) {
   case SQL:
-    module = '../config/sql';
+    library = '../config/sql';
     break;
   case MONGO:
-    module = '../config/mongo';
+    library = '../config/mongo';
     break;
   default:
     throw new Error(
@@ -16,5 +17,4 @@ switch (driver) {
     );
 }
 
-// eslint-disable-next-line import/no-dynamic-require, global-require, import/prefer-default-export
-export const { initialization } = require(module);
+export const { initialization } = require(library);

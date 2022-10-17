@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
   AdjustmentsHorizontalIcon,
   ArrowLeftCircleIcon,
@@ -29,7 +28,6 @@ function SideBar() {
 
   const [open, setOpen] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const MenusAuth = [
     { title: 'Dashboard', icon: <ChartBarIcon className="h-6 w-6" /> },
     {
@@ -121,7 +119,7 @@ function SideBar() {
            border-2 rounded-full  ${!open && 'rotate-180'}`}
         onClick={() => setOpen(!open)}
       />
-      <div
+      <button
         className="cursor-pointer items-center border-b border-gray-400"
         onClick={() => setOpen(!open)}
       >
@@ -139,7 +137,7 @@ function SideBar() {
         >
           <Link to={HOME}>Chat WebRTC</Link>
         </h1>
-      </div>
+      </button>
       <ul className="flex flex-col pt-6">
         {MenusGuest?.map((Menu, index) => (
           <li

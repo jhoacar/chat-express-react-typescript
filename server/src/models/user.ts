@@ -1,6 +1,5 @@
-/* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
-/* eslint-disable import/prefer-default-export */
+/* eslint-disable global-require */
 import { driver, SQL, MONGO } from '@config/database';
 
 let userModule: string = '';

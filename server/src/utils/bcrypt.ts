@@ -1,6 +1,5 @@
 import { hash, compare } from 'bcrypt';
 
-// eslint-disable-next-line radix
 const saltRounds = parseInt(process.env.BCRYPT_SALT_ROUNDS || '10');
 
 export async function encryptPassword(plainPassword: string) {

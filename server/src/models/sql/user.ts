@@ -48,7 +48,6 @@ export default class User extends UserBase {
     };
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async find(query: UserQuery) {
     const users = await driver.findAll({
       where: { ...query },
