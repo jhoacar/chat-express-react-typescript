@@ -72,17 +72,27 @@ function Bar() {
 
   return (
     <nav
-      className={`fixed 
-                        w-full
-                        px-2 sm:px-4 
-                        py-2.5 
-                        bg-white dark:bg-gray-900
-                        border-b 
-                        border-gray-200 dark:border-gray-700
-                        lg:static 
-                        lg:h-full
-                        lg:w-auto
-                        lg:p-0
+      className={`fixed
+                  z-10 
+                  top-0
+                  right-0
+                  left-0
+                  m-2
+                  mt-0
+                  p-4
+                  shadow-2xl
+                  rounded-lg
+                  border-solid
+                  border-2
+                  border-transparent
+                  bg-white dark:bg-gray-900
+                  dark:border-gray-700
+                  lg:static 
+                  lg:h-full
+                  lg:w-auto
+                  lg:p-0
+                  lg:m-0
+                  lg:shadow-none
                         `}
     >
       <div
@@ -151,9 +161,7 @@ function Bar() {
         </button>
         <div
           className={`inline-flex 
-                                items-center 
-                                p-2 
-                                ml-3 
+                                items-center
                                 text-sm 
                                 text-gray-500 
                                 rounded-lg 
@@ -168,7 +176,7 @@ function Bar() {
                                 `}
         >
           <Bars3Icon
-            className="h-10 w-10 p-2 border rounded border-gray-400 mb-1 cursor-pointer"
+            className="h-10 w-10 p-2.5 border rounded border-gray-400 mb-1 cursor-pointer"
             onClick={() => setOpen(!open)}
           />
         </div>
@@ -185,7 +193,7 @@ function Bar() {
                         flex-col 
                         p-4 
                         mt-4 lg:mt-0
-                        bg-gray-50 dark:bg-gray-800 lg:bg-white lg:dark:bg-gray-900
+                        bg-gray-100 dark:bg-gray-800 lg:bg-white lg:dark:bg-gray-900
                         rounded-lg 
                         border lg:border-0
                         border-gray-100 dark:border-gray-700
@@ -198,7 +206,7 @@ function Bar() {
             {MenusGuest?.map((Menu, index) => (
               <li
                 key={Menu.title}
-                className={`border rounded border-gray-400 mb-1
+                className={`bg-white hover:bg-gray-50 border rounded border-gray-400 mb-1
                 ${Menu.gap ? 'mt-9' : 'mt-2'} ${
                   index === 0 && 'bg-light-white'
                 } `}

@@ -7,6 +7,16 @@
     src: url('/fonts/Virgil.woff2');
 }
 
+html {
+    box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
 body,
 body > * {
     height: 100vh;
