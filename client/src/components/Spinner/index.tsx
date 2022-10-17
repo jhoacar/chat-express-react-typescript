@@ -1,16 +1,28 @@
-import styles from './index.module.scss';
-
 export function Spinner() {
   return (
-    <div className={styles['fallback-spinner']}>
-      <div className={styles.image}>
+    <div className={`
+    h-full 
+    flex flex-col 
+    gap-4 
+    items-center 
+    justify-center
+    `}
+    >
+      <div className="h-20 w-20">
         <img src="/icon.svg" alt="icon" />
       </div>
-      <div className={styles.loading}>
-        <div className={`${styles.effects} ${styles['effect-1']}`} />
-        <div className={`${styles.effects} ${styles['effect-2']}`} />
-        <div className={`${styles.effects} ${styles['effect-3']}`} />
-      </div>
+      <div className={`
+      h-20 w-20 
+      rounded-full 
+      border-4 
+      border-t-blue-400 
+      border-solid
+      animate-spin
+      transition 
+      ease-in-out 
+      duration-150
+      `}
+      />
     </div>
   );
 }
