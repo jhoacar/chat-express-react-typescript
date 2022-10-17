@@ -3,23 +3,54 @@ import { ReactNode } from 'react';
 
 import { Footer } from '@/components/Footer';
 
-import SideBar from '@/components/SideBar';
-import styles from './index.module.scss';
+import Bar from '@/components/Bar';
 
 export function Layout({ children }: any) {
   return (
-    <main className={styles.main}>
-      <article className={styles.article}>
-        <aside className={styles.aside}>
-          <SideBar />
+    <main
+      className={`
+        h-full 
+        flex flex-col 
+        overflow-x-hidden`}
+    >
+      <article
+        className={`
+            w-full h-full
+            lg:flex
+            `}
+      >
+        <aside
+          className={`
+                h-20
+                lg:h-full
+                `}
+        >
+          <Bar />
         </aside>
-        <section className={styles.section}>
-          <div className="flex flex-col items-center justify-center h-full p-6 bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+        <section
+          className={`
+                h-full
+                lg:w-full
+                `}
+        >
+          <div
+            className={`
+          flex flex-col 
+          items-center 
+          justify-center 
+          h-full 
+          p-6 
+          bg-white dark:bg-gray-800
+          rounded-lg 
+          border 
+          border-gray-200 dark:border-gray-700
+          shadow-md`}
+          >
             {children}
           </div>
         </section>
       </article>
-      <footer className={styles.footer}>
+      <footer className="w-full h-1/6 mt-auto">
         <Footer />
       </footer>
     </main>
