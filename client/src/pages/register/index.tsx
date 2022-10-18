@@ -120,14 +120,37 @@ function Register() {
                 >
                   Password
                 </label>
-                <div className="flex">
+                <div className={`
+                flex
+                px-3 py-2 
+                bg-gray-50 
+                border 
+                shadow-sm 
+                border-slate-300 
+                placeholder-slate-400 
+                disabled:bg-slate-50 
+                disabled:text-slate-500 
+                disabled:border-slate-200 
+                focus:outline-none 
+                focus:border-blue-500 
+                focus:ring-blue-500 
+                block 
+                w-full 
+                rounded-md
+                sm:text-sm 
+                focus:ring-1 
+                focus:invalid:border-blue-500 
+                focus:invalid:ring-blue-500 
+                disabled:shadow-none
+                `}
+                >
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     name="password"
                     id="password"
                     value={password}
                     onChange={(event:BaseSyntheticEvent) => setPassword(event.target.value)}
-                    placeholder="••••••••"
+                    placeholder={showPassword ? '1234' : '••••'}
                     required
                   />
                   <button
@@ -149,13 +172,34 @@ function Register() {
                   {' '}
                   {errorPassword && (
                   <span className="text-red-500">
-                    *
-                    {' '}
-                    password mismatch
+                    {'* password mismatch '}
                   </span>
                   )}
                 </label>
-                <div className="flex">
+                <div className={`
+                flex
+                px-3 py-2 
+                bg-gray-50 
+                border 
+                shadow-sm 
+                border-slate-300 
+                placeholder-slate-400 
+                disabled:bg-slate-50 
+                disabled:text-slate-500 
+                disabled:border-slate-200 
+                focus:outline-none 
+                focus:border-blue-500 
+                focus:ring-blue-500 
+                block 
+                w-full 
+                rounded-md
+                sm:text-sm 
+                focus:ring-1 
+                focus:invalid:border-blue-500 
+                focus:invalid:ring-blue-500 
+                disabled:shadow-none
+                `}
+                >
                   <Input
                     type={showConfirmPassword ? 'text' : 'password'}
                     name="confirm-password"
@@ -165,7 +209,7 @@ function Register() {
                       setErrorPassword(event.target.value !== password);
                       setConfirmPassword(event.target.value);
                     }}
-                    placeholder="••••••••"
+                    placeholder={showConfirmPassword ? '1234' : '••••'}
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />

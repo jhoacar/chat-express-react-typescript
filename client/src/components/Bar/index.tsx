@@ -112,7 +112,8 @@ function Bar() {
       >
         <button
           className={`
-                            absolute 
+                            absolute
+                            z-10 
                             cursor-pointer 
                             -right-3 
                             top-9 w-7 

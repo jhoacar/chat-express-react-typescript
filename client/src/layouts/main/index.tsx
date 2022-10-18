@@ -7,19 +7,27 @@ export function Layout({ children }: any) {
     h-full w-full 
     overflow-x-hidden 
     flex flex-col 
-    lg:grid lg:grid-cols-2
+    lg:flex-row
+    lg:flex-wrap
     `}
     >
       <aside className={`
-      max-h-[5rem] lg:basis-5
+      max-h-[5rem]
+      lg:max-h-max 
+      lg:min-h-full
+      lg:w-max
+      lg:border
+      lg:border 
+      lg:border-gray-200
       `}
       >
         <Bar />
       </aside>
       <article className={`
       mt-[5rem] 
-      w-full
       lg:translate-y-0 lg:flex lg:m-0
+      lg:min-h-full
+      lg:mx-auto
       `}
       >
         <section className={`
@@ -30,10 +38,7 @@ export function Layout({ children }: any) {
         items-center 
         justify-center 
         bg-white dark:bg-gray-800
-        rounded-lg 
-        border 
-        border-gray-200 dark:border-gray-700
-        shadow-md
+        rounded-lg
                 `}
         >
           {children}
@@ -41,6 +46,8 @@ export function Layout({ children }: any) {
       </article>
       <footer className={`
       w-full mt-auto
+      lg:m-0
+      lg:basis-full
       lg:translate-y-0 
       `}
       >
