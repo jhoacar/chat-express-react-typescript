@@ -1,5 +1,15 @@
+/* eslint-disable no-param-reassign */
+import useMediaDevices from './useMediaDevices';
+
 function Video() {
-  return <div>Video</div>;
+  const { stream } = useMediaDevices();
+
+  return (
+    <div>
+      Video
+      <video muted ref={(element) => { if (element) { element.srcObject = stream; } }} />
+    </div>
+  );
 }
 export default Video;
 // import { useState, useEffect } from 'react';

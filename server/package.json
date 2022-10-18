@@ -17,6 +17,7 @@
         "morgan": "^1.10.0",
         "mysql2": "^2.3.3",
         "peer": "^0.6.1",
+        "selfsigned": "^2.1.1",
         "sequelize": "^6.23.2",
         "socket.io": "^4.5.2",
         "sqlite3": "^5.1.2",

@@ -1,3 +1,4 @@
-import server from '@boot/server';
+import server, { app } from '@boot/server';
 
+export { app };
 export default server;

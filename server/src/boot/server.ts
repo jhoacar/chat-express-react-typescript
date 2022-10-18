@@ -18,4 +18,5 @@ app.use(peer);
 
 app.use(router);
 
+export { app };
 export default server;
