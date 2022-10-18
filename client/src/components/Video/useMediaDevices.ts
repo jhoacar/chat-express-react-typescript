@@ -5,6 +5,10 @@ export default function useMediaDevices() {
   const [stream, setStream] = useState<MediaStream | null>(null);
 
   const loadMediaDevices = useCallback(async () => {
+    if (!navigator || !navigator.mediaDevices) {
+      throw new Error('Media devices not available');
+    }
+
     const newStream = await navigator.mediaDevices
       .getUserMedia({
         video: true,
