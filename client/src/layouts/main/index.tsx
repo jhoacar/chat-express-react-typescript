@@ -39,8 +39,7 @@ export function Layout({ children }: any) {
         flex
         flex-col 
         items-center 
-        justify-center 
-        bg-white dark:bg-gray-800
+        justify-center
         rounded-lg
                 `}
         >
