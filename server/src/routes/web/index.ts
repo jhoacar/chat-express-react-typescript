@@ -6,4 +6,8 @@ const router = Router();
 
 router.use(Static(clientDirname));
 
+router.use('/*', (_, res) => {
+  res.sendFile(`${clientDirname}/index.html`);
+});
+
 export default router;
