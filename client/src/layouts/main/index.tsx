@@ -6,15 +6,17 @@ export function Layout({ children }: any) {
     <main className={`
     h-full w-full 
     overflow-x-hidden 
-    flex flex-col 
+    flex flex-col
+    bg-gray-100 
     lg:flex-row
     lg:flex-wrap
     `}
     >
       <aside className={`
       max-h-[5rem]
+      bg-blue-100
       lg:max-h-max 
-      lg:min-h-full
+      lg:min-h-[90%]
       lg:w-max
       lg:border
       lg:border 
@@ -25,9 +27,10 @@ export function Layout({ children }: any) {
       </aside>
       <article className={`
       mt-[5rem] 
-      lg:translate-y-0 lg:flex lg:m-0
-      lg:min-h-full
+      lg:translate-y-0 
+      lg:flex lg:m-0
       lg:mx-auto
+      lg:my-auto
       `}
       >
         <section className={`
