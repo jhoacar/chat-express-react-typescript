@@ -7,7 +7,7 @@ const peer = new Peer({
   host,
   port,
   debug: 1,
-  path: '/api/v1/peer',
+  path: '/api/peer',
 });
 
 export default peer;

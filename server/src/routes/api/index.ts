@@ -30,4 +30,8 @@ router.get('/', (req: Request, res: Response) => {
   res.redirect(`${req.originalUrl}/docs`);
 });
 
+router.use('/*', (_, res) => {
+  res.status(404).json({ errors: [{ msg: 'Not found' }] });
+});
+
 export default router;
