@@ -12,7 +12,7 @@ export const index = async (req: Request, res: Response) => {
     console.log(error);
 
     return res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };

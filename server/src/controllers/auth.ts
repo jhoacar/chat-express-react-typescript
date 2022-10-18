@@ -11,7 +11,7 @@ export const create = async (req: Request, res: Response) => {
     const user = await userInstance.findOne({ email: req.body.email });
 
     if (!user) {
-      return res.status(400).json({ error: 'bad request' });
+      return res.status(400).json({ errors: [{ msg: 'bad request' }] });
     }
 
     const validatedPassword = await decryptPassword(
@@ -20,7 +20,7 @@ export const create = async (req: Request, res: Response) => {
     );
 
     if (!validatedPassword) {
-      return res.status(400).json({ error: 'bad request' });
+      return res.status(400).json({ errors: [{ msg: 'bad request' }] });
     }
 
     const token = getJWT({ ...user, password: undefined });
@@ -36,7 +36,7 @@ export const create = async (req: Request, res: Response) => {
     console.log(error);
 
     return res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };

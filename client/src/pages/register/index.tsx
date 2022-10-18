@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { BaseSyntheticEvent, FormEventHandler, useState } from 'react';
 import toast from 'react-hot-toast';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
@@ -19,19 +19,34 @@ function Register() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [errorPassword, setErrorPassword] = useState(false);
 
+  const [registered, setRegistered] = useState(false);
+
+  if (registered) {
+    return <Navigate to={LOGIN} />;
+  }
+
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
     if (errorPassword) {
       return toast.error('Please confirm correctly your password');
     }
-    return register(name, email, password).then((result) => {
-      if (result.error) {
-        toast.error(result.error);
-      }
-    }).catch((error:any) => {
-      console.log(error);
-      toast.error('An error has ocurred in the server');
-    });
+    return register(name, email, password)
+      .then((result) => {
+        if (result.error) {
+          toast.error(result.error);
+        } else {
+          toast.success('Registered succesfully');
+          setRegistered(true);
+        }
+      })
+      .catch((error: any) => {
+        console.log(error);
+        if (error?.response.status === 400) {
+          error?.response?.data?.errors?.map((response: any) => toast.error(response.msg));
+        } else {
+          toast.error('An error has ocurred in the server');
+        }
+      });
   };
 
   return (
@@ -60,7 +75,8 @@ function Register() {
           <img className="w-8 h-8 mr-2" src="/icon.svg" alt="icon" />
           Chat WebRTC
         </Link>
-        <div className={`
+        <div
+          className={`
         w-full
         bg-white 
         rounded-lg 
@@ -91,7 +107,7 @@ function Register() {
                   name="name"
                   id="name"
                   value={name}
-                  onChange={(event:BaseSyntheticEvent) => setName(event.target.value)}
+                  onChange={(event: BaseSyntheticEvent) => setName(event.target.value)}
                   placeholder="name"
                   required
                 />
@@ -108,7 +124,7 @@ function Register() {
                   name="email"
                   id="email"
                   value={email}
-                  onChange={(event:BaseSyntheticEvent) => setEmail(event.target.value)}
+                  onChange={(event: BaseSyntheticEvent) => setEmail(event.target.value)}
                   placeholder="name@company.com"
                   required
                 />
@@ -120,7 +136,8 @@ function Register() {
                 >
                   Password
                 </label>
-                <div className={`
+                <div
+                  className={`
                 flex
                 px-3 py-2 
                 bg-gray-50 
@@ -145,21 +162,31 @@ function Register() {
                 `}
                 >
                   <Input
-                    type={showPassword ? 'text' : 'password'}
+                    type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(event:BaseSyntheticEvent) => setPassword(event.target.value)}
-                    placeholder={showPassword ? '1234' : '••••'}
+                    onChange={(event: BaseSyntheticEvent) => setPassword(event.target.value)}
+                    placeholder={
+                                            showPassword ? '1234' : '••••'
+                                        }
                     required
                   />
                   <button
                     type="button"
                     className="mx-4"
-                    onClick={() => { setShowPassword(!showPassword); }}
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
                   >
-                    {showPassword && <EyeSlashIcon className="h-6 w-6" />}
-                    {!showPassword && <EyeIcon className="h-6 w-6" />}
+                    {showPassword && (
+                    <EyeSlashIcon className="h-6 w-6" />
+                    )}
+                    {!showPassword && (
+                    <EyeIcon className="h-6 w-6" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -171,12 +198,13 @@ function Register() {
                   Confirm password
                   {' '}
                   {errorPassword && (
-                  <span className="text-red-500">
-                    {'* password mismatch '}
-                  </span>
+                    <span className="text-red-500">
+                      {'* password mismatch '}
+                    </span>
                   )}
                 </label>
-                <div className={`
+                <div
+                  className={`
                 flex
                 px-3 py-2 
                 bg-gray-50 
@@ -201,25 +229,47 @@ function Register() {
                 `}
                 >
                   <Input
-                    type={showConfirmPassword ? 'text' : 'password'}
+                    type={
+                                            showConfirmPassword
+                                              ? 'text'
+                                              : 'password'
+                                        }
                     name="confirm-password"
                     id="confirm-password"
                     value={confirmPassword}
-                    onChange={(event:BaseSyntheticEvent) => {
-                      setErrorPassword(event.target.value !== password);
-                      setConfirmPassword(event.target.value);
+                    onChange={(
+                      event: BaseSyntheticEvent,
+                    ) => {
+                      setErrorPassword(
+                        event.target.value !== password,
+                      );
+                      setConfirmPassword(
+                        event.target.value,
+                      );
                     }}
-                    placeholder={showConfirmPassword ? '1234' : '••••'}
+                    placeholder={
+                                            showConfirmPassword
+                                              ? '1234'
+                                              : '••••'
+                                        }
                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required
                   />
                   <button
                     type="button"
                     className="mx-4"
-                    onClick={() => { setShowConfirmPassword(!showConfirmPassword); }}
+                    onClick={() => {
+                      setShowConfirmPassword(
+                        !showConfirmPassword,
+                      );
+                    }}
                   >
-                    {showConfirmPassword && <EyeSlashIcon className="h-6 w-6" />}
-                    {!showConfirmPassword && <EyeIcon className="h-6 w-6" />}
+                    {showConfirmPassword && (
+                    <EyeSlashIcon className="h-6 w-6" />
+                    )}
+                    {!showConfirmPassword && (
+                    <EyeIcon className="h-6 w-6" />
+                    )}
                   </button>
                 </div>
               </div>

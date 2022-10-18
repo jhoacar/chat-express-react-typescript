@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const SERVER = import.meta.env.VITE_SERVER || '/api/v1';
+const SERVER = import.meta.env.VITE_SERVER || '';
+const API_SERVER = `${SERVER}/api/v1`;
 
 type RegisterError = { error?: string };
 type RegisterComplete = { registered?: boolean };
@@ -14,7 +15,7 @@ export async function register(
     return { error: 'Name, Email and Password are required' };
   }
 
-  const response = await axios.post(`${SERVER}/users`, {
+  const response = await axios.post(`${API_SERVER}/users`, {
     name,
     email,
     password,

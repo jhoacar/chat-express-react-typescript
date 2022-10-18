@@ -1,10 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import {
-  FormEventHandler, useState, BaseSyntheticEvent,
-} from 'react';
-import { useDispatch } from 'react-redux';
+import { FormEventHandler, useState, BaseSyntheticEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
 import { Layout } from '@/layouts';
 import { login } from '@/services/auth';
@@ -12,12 +10,20 @@ import { login as loginAction } from '@/redux/states';
 import GmailIcon from '@/assets/images/gmail.svg';
 import { HOME, LOGIN } from '@/router';
 import Input from '@/components/Input';
+import { AppStore } from '@/redux/store';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const loggedIn = useSelector(
+    (state: AppStore) => state.session.authenticated,
+  );
   const dispatch = useDispatch();
+
+  if (loggedIn) {
+    return <Navigate to={HOME} />;
+  }
 
   const handleSubmit: FormEventHandler = (event) => {
     event.preventDefault();
@@ -27,12 +33,17 @@ function Login() {
         if (result.error) {
           toast.error(result.error);
         } else {
+          toast.success('Login succesfully');
           dispatch(loginAction(result.token));
         }
       })
       .catch((error) => {
-        console.log(error);
-        toast.error('An error has ocurred in the server');
+        console.log(error?.response?.data);
+        if (error?.response.status === 400) {
+          error?.response?.data?.errors?.map((response: any) => toast.error(response.msg));
+        } else {
+          toast.error('An error has ocurred in the server');
+        }
       });
   };
 
@@ -62,7 +73,8 @@ function Login() {
           <img className="w-8 h-8 mr-2" src="/icon.svg" alt="icon" />
           Chat WebRTC
         </Link>
-        <div className={`
+        <div
+          className={`
         w-full
         bg-white 
         rounded-lg 
@@ -93,7 +105,7 @@ function Login() {
                   name="email"
                   id="email"
                   value={email}
-                  onChange={(event:BaseSyntheticEvent) => setEmail(event.target.value)}
+                  onChange={(event: BaseSyntheticEvent) => setEmail(event.target.value)}
                   placeholder="name@company.com"
                   required
                 />
@@ -105,7 +117,8 @@ function Login() {
                 >
                   Password
                 </label>
-                <div className={`
+                <div
+                  className={`
                 flex
                 px-3 py-2 
                 bg-gray-50 
@@ -130,21 +143,31 @@ function Login() {
                 `}
                 >
                   <Input
-                    type={showPassword ? 'text' : 'password'}
+                    type={
+                                            showPassword ? 'text' : 'password'
+                                        }
                     name="password"
                     id="password"
                     value={password}
-                    onChange={(event:BaseSyntheticEvent) => setPassword(event.target.value)}
-                    placeholder={showPassword ? '1234' : '••••'}
+                    onChange={(event: BaseSyntheticEvent) => setPassword(event.target.value)}
+                    placeholder={
+                                            showPassword ? '1234' : '••••'
+                                        }
                     required
                   />
                   <button
                     type="button"
                     className="mx-4"
-                    onClick={() => { setShowPassword(!showPassword); }}
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
                   >
-                    {showPassword && <EyeSlashIcon className="h-6 w-6" />}
-                    {!showPassword && <EyeIcon className="h-6 w-6" />}
+                    {showPassword && (
+                    <EyeSlashIcon className="h-6 w-6" />
+                    )}
+                    {!showPassword && (
+                    <EyeIcon className="h-6 w-6" />
+                    )}
                   </button>
                 </div>
               </div>
@@ -217,7 +240,6 @@ function Login() {
         </div>
       </div>
     </Layout>
-
   );
 }
 

@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const SERVER = import.meta.env.VITE_SERVER || '/api/v1';
+const SERVER = import.meta.env.VITE_SERVER || '';
+const API_SERVER = `${SERVER}/api/v1`;
 
 export type LoginError = { error?: string };
 export type LoginResult = { token?: string };
@@ -14,7 +15,7 @@ export async function login(
     return { error: 'Email and Password are required' };
   }
 
-  const response = await axios.post(`${SERVER}/auth/login`, {
+  const response = await axios.post(`${API_SERVER}/auth/login`, {
     email,
     password,
   });

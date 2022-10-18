@@ -21,7 +21,7 @@ export const create = async (req: Request, res: Response) => {
     console.log(error);
 
     res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };
@@ -40,7 +40,7 @@ export const destroy = async (req: Request, res: Response) => {
     console.log(error);
 
     res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };
@@ -59,7 +59,7 @@ export const index = async (req: Request, res: Response) => {
     console.log(error);
 
     res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };
@@ -78,7 +78,7 @@ export const show = async (req: Request, res: Response) => {
     console.log(error);
 
     res.status(500).send({
-      errors: [{ message: error.message }],
+      errors: [{ msg: error.message }],
     });
   }
 };

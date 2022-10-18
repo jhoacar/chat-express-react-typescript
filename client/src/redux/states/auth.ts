@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import { Auth } from '@/models';
 import { getToken, removeToken, setToken } from '@/utils/token';
@@ -12,18 +13,17 @@ export const authSlice = createSlice({
   initialState: authInitalState,
   reducers: {
     login: (state, action) => {
+      console.log('Here: ', action.payload);
       setToken(action.payload);
-      return {
-        authenticated: true,
-        token: action.payload,
-      };
+      state.authenticated = true;
+      state.token = action.payload;
+      return state;
     },
-    logout: () => {
+    logout: (state) => {
       removeToken();
-      return {
-        authenticated: false,
-        token: '',
-      };
+      state.authenticated = false;
+      state.token = '';
+      return state;
     },
   },
 });
